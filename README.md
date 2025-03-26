@@ -4,15 +4,15 @@
 
 `DISCIPLINA: Trabalho Interdisciplinar Aplicações Web`
 
-`Xº semestre/ANO`
+`1º semestre/2025`
 
 Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
+* Lara Rossini Rhis
+* Marcus Vinicius Lima Pereira
+* Vinicius Muniz Costa
 * Nome completo do aluno 4
 * Nome completo do aluno 5
 * Nome completo do aluno 6
