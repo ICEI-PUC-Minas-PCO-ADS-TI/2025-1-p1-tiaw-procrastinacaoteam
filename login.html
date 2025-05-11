@@ -1,0 +1,57 @@
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página login</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <header>
+    <h1>Login</h1>
+    <img src="/img/user.png" alt="userilustrator" width="150" height="150">
+    <div class="formulario">
+      <form id="formlogin">
+        <h3><input class="lista" type="text" id="loginInput" placeholder="Usuário"><img src="/img/user.png" width="30" height="30"></h3>
+        <h3><input class="lista" type="password" id="passwordInput" placeholder="Senha"><img src="/img/lock.png" width="30" height="30"></h3>
+        <h3><input class="btn" type="submit" value="Login"></h3>
+      </form>
+    </div>
+    <button id="btn2">Não possuo conta</button>
+  </header>
+
+  <script>
+    function loginUser(login, password) {
+      const usuariosStr = sessionStorage.getItem('usuarios');
+      if (!usuariosStr) return false;
+
+      const usuarios = JSON.parse(usuariosStr);
+      const usuarioEncontrado = usuarios.find(u => u.login === login && u.senha === password);
+
+      if (usuarioEncontrado) {
+        sessionStorage.setItem('usuario', JSON.stringify(usuarioEncontrado));
+        return true;
+      }
+
+      return false;
+    }
+
+    document.getElementById('formlogin').addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const login = document.getElementById('loginInput').value;
+      const password = document.getElementById('passwordInput').value;
+
+      if (loginUser(login, password)) {
+        alert('Login bem-sucedido!');
+        window.location.href = 'index.html';
+      } else {
+        alert('Login ou senha inválidos');
+      }
+    });
+
+    document.getElementById('btn2').addEventListener('click', () => {
+      window.location.href = 'detalhes.html';
+    });
+  </script>
+</body>
+</html>

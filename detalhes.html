@@ -1,0 +1,69 @@
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página SIGN UP</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="index.js"></script>
+</head>
+
+    <body>
+        <div class="titulo">
+            <header>
+            <h1 class="singup">SIGN UP</h1>
+            <p>Procrastinar? Nunca mais!</p>
+            <p>Para nós, o seu bem estar é o que importa.</p>
+            <p>Por uma rotina produtiva!</p>
+            <img src="img/Imagem preguiça.png" alt="Logo" width="250" height="250">
+            </header>
+
+            <main class="formulario">
+            <form id="cadastrologin">
+                <h3><input class="lista" type="text" placeholder="Nome do usuário"><img src="/img/user.png" width="30" height="30"></h3>
+                <h3><input class="lista" type="email" placeholder="E-mail"><img src="/img/email.png" width="30" height="30"></h3>
+                <h3><input class="lista" type="password" placeholder="Defina sua senha"><img src="/img/lock.png" width="30" height="30"></h3>
+                <h3><input class="lista" type="password" placeholder="Confirmar senha"><img src="/img/open-padlock.png" width="30" height="30"></h3>
+            </form>
+            </main>
+
+            <button class="btn"><h3>Criar conta</h3></button>
+            <button id="btn2">Já possuo conta</button>
+        </div>
+
+        <script>
+            document.querySelector('.btn').addEventListener('click', () => {
+            const inputs = document.querySelectorAll('.lista');
+            const nome = inputs[0].value;
+            const email = inputs[1].value;
+            const senha = inputs[2].value;
+            const confirmarSenha = inputs[3].value;
+
+            if (senha === confirmarSenha) {
+            let usuarios = JSON.parse(sessionStorage.getItem('usuarios')) || [];
+
+            const novoUsuario = {
+                id: usuarios.length + 1,
+                login: nome,
+                email: email,
+                senha: senha
+            };
+
+            usuarios.push(novoUsuario);
+
+            sessionStorage.setItem('usuarios', JSON.stringify(usuarios));
+            sessionStorage.setItem('usuario', JSON.stringify(novoUsuario));
+
+            alert('Conta criada com sucesso!');
+            window.location.href = 'index.html';} 
+            else {
+                alert('As senhas não coincidem. Tente novamente.');
+                }
+            });
+
+                document.getElementById('btn2').addEventListener('click', () => {
+                window.location.href = 'login.html';
+            });
+        </script>
+    </body>
+</html>
