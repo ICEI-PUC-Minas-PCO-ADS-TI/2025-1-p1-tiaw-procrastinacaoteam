@@ -7,79 +7,115 @@
     <title>Action Mode - Onboarding</title>
 </head>
 <body>
+
     <h1>Action Mode!</h1>
     <p>Seja bem vindo ao Action Mode!</p>
     <p>A seguir, temos um pequeno questionário para conhecer você melhor.</p>
 
-    <h2>Questão 01</h2>
-    <p>Digite sua idade: </p>
-    <input type="text" placeholder="Idade">
 
-    <h2>Questão 02</h2>
-    <p>Quantas tarefas você deseja realizar por dia?</p>
-    <input type="number" min="1" max="15" step="1" value="1">
+    <form id="formulario">
+        <h2>Questão 01</h2>
+        <p>Digite sua idade: </p>
+        <input type="number" name="idade" placeholder="Idade">
 
-    <h2>Questão 03</h2>
-    <p>Qual perfil você acha que mais se identifica?</p>
-    <form>
-        <label>
-            <input type="radio" name="escolha" value="p1">
-            Produtiva
-        </label>
-        <br>
-        <label>
-            <input type="radio" name="escolha" value="p2">
-            Procrastinadora
-        </label>
-        <br>
-        <label>
-            <input type="radio" name="escolha" value="p3">
-            Não sei ao certo
-        </label>
-    </form>
+        <h2>Questão 02</h2>
+        <p>Quantas tarefas você deseja realizar por dia?</p>
+        <input type="number" min="1" max="15" step="1" value="1" name="qnttarefas">
 
-    <h2>Questão 04</h2>
-    <p>Ao usar o Action Mode, você pretende, principalmente...</p>
-    <form>
-        <label>
-            <input type="radio" name="escolha" value="ob1">
-            Vencer a procrastinação 
-        </label>
-        <br>
-        <label>
-            <input type="radio" name="escolha" value="ob2">
-            Me tornar mais produtivo
-        </label>
-        <br>
-        <label>
-            <input type="radio" name="escolha" value="ob3">
-            Organizar melhor minha rotina 
-        </label>
-    </form>
+        <h2>Questão 03</h2>
+        <p>Qual perfil você acha que mais se identifica?</p>
+            <label>
+                <input type="radio" name="perfil" value="produtiva">
+                Produtiva
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="perfil" value="procrastinadora">
+                Procrastinadora
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="perfil" value="naosei">
+                Não sei ao certo
+            </label>
 
-    <h2>Questão 05</h2>
-    <p>Você se distraí facilmente na realização de suas tarefas?</p>
-    <form>
-        <label>
-            <input type="radio" name="escolha" value="d1">
-            Sim, bastante
-        </label>
-        <br>
+        <h2>Questão 04</h2>
+        <p>Ao usar o Action Mode, você pretende, principalmente...</p>
+            <label>
+                <input type="radio" name="objetivo" value="vencer-p">
+                Vencer a procrastinação 
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="objetivo" value="tornar-p">
+                Me tornar mais produtivo
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="objetivo" value="organizar">
+                Organizar melhor minha rotina 
+            </label>
 
-        <label>
-            <input type="radio" name="escolha" value="d2">
-            De forma alguma
-        </label>
-        <br>
-        
-        <label>
-            <input type="radio" name="escolha" value="d3">
-            Um pouco
-        </label>
+        <h2>Questão 05</h2>
+        <p>Você se distraí facilmente na realização de suas tarefas?</p>
+            <label>
+                <input type="radio" name="distracao" value="distrai">
+                Sim, bastante
+            </label>
+            <br>
+
+            <label>
+                <input type="radio" name="distracao" value="naodistrai">
+                De forma alguma
+            </label>
+            <br>
+
+            <label>
+                <input type="radio" name="distracao" value="pouco">
+                Um pouco
+            </label>
+    
+    <button type="submit">Salvar e enviar</button>
     </form>
 
 
     <script>
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            const formulario = document.getElementById('formulario');
+
+            formulario.addEventListener('submit', function (event) {
+                event.preventDefault();
+            
+                const idade = formulario.idade.value;
+                const qnttarefas = formulario.qnttarefas.value;
+                const perfil = document.querySelector('input[name="perfil"]:checked').value;
+                const objetivo = document.querySelector('input[name="objetivo"]:checked').value;
+                const distracao = document.querySelector('input[name="distracao"]:checked').value;
+
+                const onboarding = {
+                    idade: idade,
+                    qnttarefas: qnttarefas,
+                    perfil: perfil,
+                    objetivo: objetivo,
+                    distracao: distracao
+                };
+
+                localStorage.setItem('respostas', JSON.stringify(onboarding));
+                const dados = localStorage.getItem('respostas');
+
+                if(dados) {
+                    const respostas = JSON.parse(dados);
+                    console.log(respostas);
+                } else {
+                    console.log("Nenhum dado salvo");
+                }
+                alert("Salvo.");
+            })
+        })
+            
+        
+
         
     </script>
 </body>
