@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Respostas</title>
+</head>
+<body onload="carrega()">
+    <h1>Resultados do seu onboarding</h1>
+    <p>De acordo com suas respostas, aqui está o seu onboarding: </p>
+    <div id="tela">
+
+    </div>
+
+
+
+    <script>
+        function carrega() {
+    
+            const dados = localStorage.getItem('respostas');
+            const tela = document.getElementById('tela');
+            const r = JSON.parse(dados);
+
+
+            //Exibição das respostas na tela!
+            tela.innerHTML += `<h2>Questão 01</h2>
+            <p><strong>Digite sua idade: </p></strong>
+            <p>Resposta: ${r.idade} <br>
+                <h2>Questão 02</h2>
+            <p><strong>Quantas tarefas você deseja realizar por dia? </p></strong>
+            <p>Resposta: ${r.qnttarefas} <br>
+                <h2>Questão 03</h2>
+            <p><strong>Qual perfil você acha que mais se identifica? </p></strong>
+            <p>Resposta: ${r.perfil} <br>
+                <h2>Questão 04</h2>
+            <p><strong>Ao usar o Action Mode, você pretende, principalmente...</p></strong>
+            <p>Resposta: ${r.objetivo} <br>
+                <h2>Questão 05</h2>
+            <p><strong>Você se distraí facilmente na realização de suas tarefas? </p></strong>
+            <p>Resposta: ${r.distracao} <br>`
+
+            //Exibição das respostas no console do navegador!
+            console.log("Suas respostas");
+            console.log("Idade: ", r.idade);
+            console.log("Quantas tarefas você deseja realizar por dia? ", r.qnttarefas);
+            console.log("Qual perfil você acha que mais se identifica? ", r.perfil);
+            console.log("Ao usar o Action Mode, você pretende, principalmente... ", r.objetivo);
+            console.log("Você se distraí facilmente na realização de suas tarefas? ", r.distracao);
+        }
+    </script>
+</body>
+</html>
