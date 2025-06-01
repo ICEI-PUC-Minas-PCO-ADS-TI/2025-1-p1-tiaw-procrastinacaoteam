@@ -74,8 +74,11 @@
                 <input type="radio" name="distracao" value="Um pouco">
                 Um pouco
             </label>
+
+            <br>
+            <br>
     
-    <button type="submit">Salvar e enviar</button>
+    <button id="btnsalvar" type="submit">Salvar e enviar</button>
     </form>
 
 
@@ -88,6 +91,7 @@
                 event.preventDefault();
                 
                 //Criando varíaveis pra receber os valores
+                
                 const idade = formulario.idade.value.trim();
                 const qnttarefas = formulario.qnttarefas.value;
                 const perfil = document.querySelector('input[name="perfil"]:checked');
@@ -98,6 +102,11 @@
                 if (!idade || !qnttarefas || !perfil || !objetivo ||!distracao) {
                     alert("Dados incompletos. Certifique-se de responder completamente o questionário.")
                     return; 
+                }
+
+                 if (idade > 100 || idade <= 0) {
+                    alert("Sua idade não parece certa... Tente novamente! ");
+                    return;
                 }
                 
 

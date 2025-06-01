@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style2.css">
     <title>Respostas</title>
 </head>
 <body onload="carrega()">
     <h1>Resultados do seu onboarding</h1>
     <p>De acordo com suas respostas, aqui está o seu onboarding: </p>
     <div id="tela">
+
+        <button id="editar" onclick="editarDados()">Editar respostas</button>
 
     </div>
 
@@ -24,7 +27,7 @@
 
             //Exibição das respostas na tela!
             tela.innerHTML += `<h2>Questão 01</h2>
-            <p><strong>Digite sua idade: </p></strong>
+            <p><strong>Sua idade </p></strong>
             <p>Resposta: ${r.idade} <br>
                 <h2>Questão 02</h2>
             <p><strong>Quantas tarefas você deseja realizar por dia? </p></strong>
@@ -46,6 +49,11 @@
             console.log("Qual perfil você acha que mais se identifica? ", r.perfil);
             console.log("Ao usar o Action Mode, você pretende, principalmente... ", r.objetivo);
             console.log("Você se distraí facilmente na realização de suas tarefas? ", r.distracao);
+        }
+
+        function editarDados() {
+            alert("Você escolheu editar as informações...");
+            window.location.href = 'index2.html';
         }
     </script>
 </body>
