@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página SIGN UP</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="index.js"></script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="/js/index.js"></script>
 </head>
 
     <body>
@@ -32,38 +32,61 @@
         </div>
 
         <script>
-            document.querySelector('.btn').addEventListener('click', () => {
+            document.querySelector('.btn').addEventListener('click', async () => {
             const inputs = document.querySelectorAll('.lista');
-            const nome = inputs[0].value;
-            const email = inputs[1].value;
+            const nome = inputs[0].value.trim();
+            const email = inputs[1].value.trim();
             const senha = inputs[2].value;
             const confirmarSenha = inputs[3].value;
 
-            if (senha === confirmarSenha) {
-            let usuarios = JSON.parse(sessionStorage.getItem('usuarios')) || [];
+        if (!nome || !email || !senha || !confirmarSenha) {
+            alert('Por favor, preencha todos os campos.');
+            return;
+        }
+
+        if (senha !== confirmarSenha) {
+            alert('As senhas não coincidem. Tente novamente.');
+            return;
+        }
+
+        try {
+            const checar = await fetch(`http://localhost:3000/usuarios?login=${nome}`);
+            const existentes = await checar.json();
+
+            if (existentes.length > 0) {
+                alert('Usuário já cadastrado. Escolha outro nome de usuário.');
+                return;
+            }
 
             const novoUsuario = {
-                id: usuarios.length + 1,
                 login: nome,
                 email: email,
                 senha: senha
             };
 
-            usuarios.push(novoUsuario);
-
-            sessionStorage.setItem('usuarios', JSON.stringify(usuarios));
-            sessionStorage.setItem('usuario', JSON.stringify(novoUsuario));
-
-            alert('Conta criada com sucesso!');
-            window.location.href = 'index.html';} 
-            else {
-                alert('As senhas não coincidem. Tente novamente.');
-                }
+            const resposta = await fetch('http://localhost:3000/usuarios', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(novoUsuario)
             });
 
-                document.getElementById('btn2').addEventListener('click', () => {
-                window.location.href = 'login.html';
-            });
+            if (resposta.ok) {
+                const usuarioCriado = await resposta.json();
+                sessionStorage.setItem('usuario', JSON.stringify(usuarioCriado));
+                alert('Conta criada com sucesso!');
+                window.location.href = 'index.html';
+            } else {
+                alert('Erro ao criar a conta. Tente novamente.');
+            }
+        } catch (erro) {
+            console.error('Erro:', erro);
+            alert('Erro ao conectar com o servidor.');
+        }
+        });
+
+        document.getElementById('btn2').addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
         </script>
     </body>
 </html>

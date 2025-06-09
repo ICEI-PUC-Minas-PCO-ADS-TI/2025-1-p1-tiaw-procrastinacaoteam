@@ -1,0 +1,40 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "login": "Daniel",
+      "email": "danielzin007@gmail,com",
+      "senha": "123456"
+    },
+    {
+      "id": "2",
+      "login": "Lucas",
+      "email": "lucas556@gmail,com",
+      "senha": "Lucas123"
+    },
+    {
+      "id": "3",
+      "login": "Maria",
+      "email": "maria789@gmail,com",
+      "senha": "Maria@123"
+    },
+    {
+      "id": "4",
+      "login": "João",
+      "email": "joao321@gmail,com",
+      "senha": "Joao321"
+    },
+    {
+      "id": "5",
+      "login": "Ana",
+      "email": "ana456@gmail,com",
+      "senha": "Ana456"
+    },
+    {
+      "id": "ff23",
+      "login": "Alexandre",
+      "email": "bolsonaro@gmail.com",
+      "senha": "tigrinho1"
+    }
+  ]
+}

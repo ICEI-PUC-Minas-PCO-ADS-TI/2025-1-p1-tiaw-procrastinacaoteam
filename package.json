@@ -1,0 +1,23 @@
+{
+  "name": "splint01_daniel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server --watch db/db.json --port 3000 --static ./public"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ICEI-PUC-Minas-PCO-ADS-TI/2025-1-p1-tiaw-procrastinacaoteam.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ICEI-PUC-Minas-PCO-ADS-TI/2025-1-p1-tiaw-procrastinacaoteam/issues"
+  },
+  "homepage": "https://github.com/ICEI-PUC-Minas-PCO-ADS-TI/2025-1-p1-tiaw-procrastinacaoteam#readme",
+  "description": "",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  }
+}
