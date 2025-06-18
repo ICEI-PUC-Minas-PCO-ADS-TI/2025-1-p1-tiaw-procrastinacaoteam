@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Detalhes</title>
+</head>
+<body>
+    <div id="tela"></div>
+
+    
+    <script src="app.js"></script>
+
+    <script>
+        let params = new URLSearchParams(location.search) 
+        let id = params.get('id')
+        let tela = document.getElementById('tela')
+
+        const tarefas = informacoes[0].tarefas  //acessa o array tarefas do meu JSON
+
+        const exibicao = tarefas.find(function (t) {return t.id == id})
+        
+
+        if (exibicao) {
+            tela.innerHTML += `<header class='cabecalho'><h1>Tarefas ${exibicao.tipo}</h1></header>`;
+            exibicao.itens.forEach(item => {  //foreach vai passar pelo meus itens
+                tela.innerHTML += `<div id='tarefas-exibidas'><li>${item.tarefa}</li></div> <br>`
+            });
+
+        }
+        else {
+            tela.innerHTML = "URL inválida. Tente novamente..."
+        }
+        
+        
+    </script>
+</body>
+</html>

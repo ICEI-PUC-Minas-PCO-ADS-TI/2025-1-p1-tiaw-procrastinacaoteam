@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Retrospecto</title>
+</head>
+<body>
+    
+    <header class="cabecalho">
+        <h1 class="title">Meu retrospecto!</h1>
+    </header>
+   
+    <br>
+    <br>
+    <br>
+    <main>
+            <div id="tela"></div>
+        
+    </main>
+    
+
+    </div>
+    
+    
+    <br>
+    <br>
+
+   
+
+    <script src="app.js"></script>
+    <script>
+
+        let tela = document.getElementById('tela')
+
+        for(let i = 0; i < informacoes.length; i++) {
+            dado = informacoes[i]  //se refere ao meu JSON 
+
+            tela.innerHTML += `<div id='dados'> <div class='dadosjs'>PONTOS: ${dado.pontos} </div><br>
+            <br>
+            <div class='dadosjs'>SEMANA ${dado.semanas} </div> <br>
+            <br>
+            <div class='dadosjs'><a href="detalhes.html?id=${dado.tarefas[0].id}">TAREFAS CONCLUÍDAS: ${dado.tarefas[0].itens.length}</a> </div> <br>  
+            <br>
+            <div class='dadosjs'><a href="detalhes.html?id=${dado.tarefas[1].id}">TAREFAS PENDENTES: ${dado.tarefas[1].itens.length}</a> </div> <br>
+            <br> </div>`
+             //os dois arrays do meu json
+            
+        }
+
+        let total = dado.tarefas[0].itens.length + dado.tarefas[1].itens.length  //total de tarefas (pendentes + concluidas)
+
+        let percentual = (dado.tarefas[0].itens.length / total) * 100
+        //percentual % das concluidas
+
+        tela.innerHTML += "<p id='p-grafico'>Porcentagem: " + percentual + "% das tarefas concluídas</p>"
+    </script>
+
+
+
+    <!-- Inicio do meu gráfico (CHART.JS)-->
+    <div id="grafico">
+    
+        <canvas id="myChart"></canvas>
+    
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+
+      const ctx = document.getElementById('myChart');
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5'],
+          datasets: [{
+            label: 'MENU PRODUTIVIDADE',
+            data: [11, 38, percentual, 40, 59],
+            backgroundColor: [
+                '#129745'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                color: 'white'
+              },
+            },
+            x: {
+                ticks: {
+                    color: 'black'
+                }
+            }
+          }
+        }
+      });
+    </script>
+
+    <!-- Fim do meu gráfico (CHART.JS)-->
+
+    
+</body>
+</html>
