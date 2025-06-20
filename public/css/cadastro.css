@@ -1,0 +1,244 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #96C05D;
+    }
+
+    .logo-topo {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      z-index: 999;
+    }
+
+    .logo-topo img {
+      width: 60px;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-topo img:hover {
+      transform: scale(1.1);
+    }
+
+    header {
+      background-color: #006400;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      border-bottom: 3px solid #004d00;
+    }
+
+    .titulo {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .titulo h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .titulo p {
+      font-size: 18px;
+      color: #f0f0f0;
+    }
+
+    .titulo img {
+      margin-top: 20px;
+      border-radius: 15px;
+    }
+
+    .formulario {
+      max-width: 500px;
+      margin: 30px auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    #cadastrologin h3 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      background-color: #f0f0f0;
+      padding: 10px 15px;
+      border-radius: 10px;
+    }
+
+    .lista {
+      width: 80%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .btn{
+    margin: 15px auto;
+    display: block;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #006400, #96C05D);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 12px rgba(0, 100, 0, 0.4);
+    animation: pulse 2.5s infinite ease-in-out;
+  }
+
+  .btn:hover {
+    background: linear-gradient(135deg, #005000, #7fb94f);
+    transform: scale(1.07);
+    box-shadow: 0 0 16px rgba(0, 100, 0, 0.6);
+  }
+
+     #btn3 {
+      margin: 15px auto;
+      display: block;
+      padding: 12px 20px;
+      background-color: #006400;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    #btn3:hover {
+      background-color: #005000;
+      transform: scale(1.05);
+    }
+
+    
+    .carrossel-container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 40px auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      background: #f0f5eb;
+      border: 2px solid #006400;
+    }
+
+    .carrossel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .card {
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 30px;
+      background-color: #fff;
+      text-align: center;
+    }
+
+    .card img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 15px;
+      border: 3px solid #96C05D;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      font-size: 28px;
+      color: #006400;
+      margin: 10px 0;
+    }
+
+    .card p {
+      font-size: 16px;
+      color: #333;
+      padding: 0 10px;
+    }
+
+    .card a {
+      display: inline-block;
+      padding: 12px 24px;
+      background: linear-gradient(to right, #006400, #96C05D);
+      color: white;
+      border-radius: 10px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .card a:hover {
+      background: #005000;
+    }
+
+    .btn-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #006400;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      cursor: pointer;
+      border-radius: 50%;
+      font-size: 22px;
+      z-index: 10;
+    }
+
+    .btn-nav:hover {
+      background: #004d00;
+    }
+
+    #prevBtn { left: 10px; }
+    #nextBtn { right: 10px; }
+
+    @media (max-width: 768px) {
+      .formulario {
+        width: 90%;
+        padding: 20px;
+      }
+
+      .card img {
+        width: 90%;
+      }
+
+      .btn, #btn3 {
+        width: 90%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .titulo h1 {
+        font-size: 32px;
+      }
+
+      .titulo p {
+        font-size: 16px;
+      }
+
+      .btn, #btn3 {
+        font-size: 16px;
+        padding: 10px;
+      }
+
+      #cadastrologin h3 {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .lista {
+        width: 100%;
+      }
+    }

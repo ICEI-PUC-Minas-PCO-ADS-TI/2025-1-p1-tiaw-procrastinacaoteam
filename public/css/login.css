@@ -1,80 +1,129 @@
+body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #96C05D;
+      margin: 0;
+      padding: 0;
+    }
 
-header{
-    background-color: #96C05D;
-    padding: 20px;
-    text-align: center;
-    border-radius: 100px;
-    margin: 5%;
-}
+    .logo-topo {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      z-index: 999;
+    }
 
-h1{
-    color: #000;
-    font-size: 50px;
-    text-align: center;
-    margin-top: 20px;
-    padding: 15px;
-}
+    .logo-topo img {
+      width: 60px;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-img{
-    padding: auto;
-    align-items: center;
-}    
+    .logo-topo img:hover {
+      transform: scale(1.1);
+    }
 
-.formulario{
-    display: block;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-    padding: 20px;
-    border-radius: 10px;
-    color: #000;
-    position: relative;
-    margin-bottom: 15px;
-    width: 100%;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-}
+    header {
+      background-color: #006400;
+      padding: 30px 20px;
+      text-align: center;
+      border-radius: 0 0 30px 30px;
+    }
 
-.lista{
-    display: flex;
-    flex-direction: column;
-    margin-left: 25%;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    color: #000;
-}
+    header h1 {
+      color: white;
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
 
-.btn{
-    background-color: #006400;
-    color: white;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 40px;;
-    margin-top: 15px;
-}
+    header img.user-img {
+      width: 150px;
+      height: 150px;
+      margin-bottom: 20px;
+    }
 
-#btn2{
-    color: black;
-    cursor: pointer;
-    font-size: 15px;
-    margin: 5px;
-}
+    .formulario {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 400px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
 
-header h3 img{
-    display: flex;
-    margin-left: 55px;
-    padding: auto;
-    position: absolute;
-    align-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    margin-top: -40px;
-    
-}
+    .campo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .campo input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    .campo img {
+      margin-left: 10px;
+      width: 30px;
+      height: 30px;
+    }
+
+    .btn {
+      background-color: #006400;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #004d00;
+    }
+
+    #btn2 {
+      margin-top: 20px;
+      background: none;
+      border: none;
+      font-size: 16px;
+      text-decoration: underline;
+      cursor: pointer;
+      color: white;
+    }
+
+    #btn2:hover {
+      color: #ccc;
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 32px;
+      }
+
+      .campo input {
+        font-size: 14px;
+      }
+
+      .btn {
+        padding: 10px 24px;
+        font-size: 14px;
+      }
+
+      .formulario {
+        margin: 20px;
+        padding: 15px;
+      }
+
+      .logo-topo img {
+        width: 50px;
+      }
+    }

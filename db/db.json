@@ -31,10 +31,28 @@
       "senha": "Ana456"
     },
     {
-      "id": "ff23",
-      "login": "Alexandre",
-      "email": "bolsonaro@gmail.com",
-      "senha": "tigrinho1"
+      "id": "6",
+      "login": "Rodrigo",
+      "email": "Rodrigo11@gmail.com",
+      "senha": "1234567"
+    },
+    {
+      "id": "7",
+      "login": "Samuel",
+      "email": "Samuel919@gmail",
+      "senha": "123456"
+    },
+    {
+      "id": "8",
+      "login": "Gustavin",
+      "email": "Gustavin@gmail.com",
+      "senha": "bandida"
+    },
+    {
+      "id": "9",
+      "login": "Jorge",
+      "email": "Jorgin123@gmail.com",
+      "senha": "Batata"
     }
   ]
 }

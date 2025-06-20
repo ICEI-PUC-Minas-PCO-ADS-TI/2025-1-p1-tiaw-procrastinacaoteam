@@ -28,6 +28,14 @@ function logoutUser(){
     location.href = "login.html"
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const usuarioLogado = JSON.parse(sessionStorage.getItem('usuario'));
+    if (usuarioLogado) {
+    nomeUsuario.textContent = `Olá, ${usuarioLogado.login}`;
+  }
+    });
+
+
 const informacoes = {
   "Carrossel": [
     {
@@ -42,7 +50,7 @@ const informacoes = {
       "pagina": "Calendario",
       "imagem": "/img/calendario.png",
       "detalhes": "Aqui no calendário você poderá acompanhar quais dias você interagiu e completou as tarefas do site, além de marcar datas, compromissos, ou relatar algo que ocorreu no dia, dentre outros...",
-      "link": "calendario.html"
+      "link": "metas.html"
     },
     {
       "id": 3,
@@ -63,7 +71,7 @@ const informacoes = {
       "pagina": "Saiba mais",
       "imagem": "/img/SaibaMais.png",
       "detalhes": "Aqui você fica informado sobre como funciona a procastinação e como ela afeta diretamente a sua vida",
-      "link": "SaibaMais.html"
+      "link": "about.html"
     }
   ]
 };
@@ -107,4 +115,5 @@ setInterval(() => {
   index = (index + 1) % informacoes.Carrossel.length;
   updateCarousel();
 }, 5000); 
+
 
