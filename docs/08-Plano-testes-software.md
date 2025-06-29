@@ -15,7 +15,7 @@ Por exemplo:
 | Requisito associado | RF-00X - A página inicial do site deverá conter, no canto superior direito, a aba "Login". |
 | Objetivo do teste | Verificar se o login funciona de acordo com o necessário. |
 | Passos | - Acessar o navegador <br> - Informar a URL do projeto https://actionmode.online/index.html <br> - Ir em "Login" <br> - Preencher os campos "usuário" e "senha" <br> - Clicar em "Login" <br>  |
-| Critério de êxito | - Alerta com a mensagem "Login bem sucedido!" |
+| Critério de êxito | - Alerta com a mensagem "Login bem sucedido!" e acesso disponível ao site |
 | Responsável pela elaboração do caso de teste | Vinicius Muniz |
 
 <br>
