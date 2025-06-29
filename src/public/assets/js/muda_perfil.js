@@ -1,134 +1,134 @@
-const apiUrl = "http://localhost:3000/usuarios";
-
-// Variável global para armazenar a imagem em base64 temporariamente
-let imagemBase64 = "";
-
-// Verifica se há usuário logado
-function verificarLogin() {
-    const usuarioLogadoId = sessionStorage.getItem("usuarioLogadoId");
-    if (!usuarioLogadoId) {
-        alert("Você precisa estar logado para acessar esta página.");
-        window.location.href = "/modulos/login/login.html";
-        return false;
-    }
-    return true;
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    if (!verificarLogin()) return;
 
-    const usuarioLogadoId = sessionStorage.getItem("usuarioLogadoId");
+    const API_BASE_URL = 'https://procrastinacao.glitch.me';
 
-    fetch(`${apiUrl}/${usuarioLogadoId}`)
-        .then(res => {
-            if (!res.ok) {
-                throw new Error(res.status === 404 ? "Usuário não encontrado." : "Erro ao buscar dados do usuário.");
-            }
-            return res.json();
-        })
-        .then(usuario => {
-            // Preenche os campos com dados do usuário
-            document.getElementById("login").value = usuario.login || "";
-            document.getElementById("email").value = usuario.email || "";
-            document.getElementById("senha").value = usuario.senha || "";
+    const usuarioLogadoString = sessionStorage.getItem('usuario');
+    if (!usuarioLogadoString) {
+        alert("Você precisa estar logado para acessar esta página.");
+        window.location.href = "/login.html"; 
+        return;
+    }
+    const usuarioLogado = JSON.parse(usuarioLogadoString);
+    const usuarioId = usuarioLogado.id;
 
-            // Foto de perfil
-            const foto = usuario.foto || "/assets/images/usuario.png";
-            document.getElementById("fotoPerfilHeader").src = foto;
-            document.getElementById("fotoPerfilMain").src = foto;
 
-            // Pontuação
-            document.getElementById("pontosUsuario").textContent = `🔥 ${usuario.pontuacao || 0}`;
-        })
-        .catch(err => {
-            console.error("Erro ao carregar dados do usuário:", err);
-            alert("Erro ao carregar dados do usuário: " + err.message);
-        });
-});
+    const form = document.getElementById('formMudaPerfil'); 
+    const loginInput = document.getElementById("login");
+    const emailInput = document.getElementById("email");
+    const senhaInput = document.getElementById("senha");
+    const fotoInput = document.getElementById("inputFoto");
+    const fotoPerfilHeader = document.getElementById("fotoPerfilHeader");
+    const fotoPerfilMain = document.getElementById("fotoPerfilMain");
+    const pontosUsuarioSpan = document.getElementById("pontosUsuario"); 
+    const btnSalvar = document.getElementById("btn-salvar"); 
+    const btnSair = document.getElementById("btn-sair");
 
-// Lógica de seleção e visualização da nova imagem
-document.getElementById("inputFoto").addEventListener("change", function () {
-    const file = this.files[0];
-    if (file) {
+
+    let novaImagemBase64 = ""; 
+
+
+
+    function preencherDadosIniciais() {
+        if (!usuarioLogado) return;
+
+        loginInput.value = usuarioLogado.login || "";
+        emailInput.value = usuarioLogado.email || "";
+        senhaInput.value = usuarioLogado.senha || "";
+
+        const fotoAtual = usuarioLogado.foto || "/assets/images/usuario.png";
+        fotoPerfilHeader.src = fotoAtual;
+        fotoPerfilMain.src = fotoAtual;
+
+        if (pontosUsuarioSpan) {
+            pontosUsuarioSpan.textContent = `🔥 ${usuarioLogado.pontuacao || 0}`;
+        }
+    }
+
+
+    function handleSelecaoDeFoto() {
+        const file = fotoInput.files[0];
+        if (!file) return;
+
         if (!file.type.startsWith('image/')) {
             alert("Por favor, selecione um arquivo de imagem válido.");
-            this.value = '';
+            fotoInput.value = ''; 
             return;
         }
+
         const reader = new FileReader();
         reader.onload = function (e) {
-            imagemBase64 = e.target.result;
-            document.getElementById("fotoPerfilHeader").src = imagemBase64;
-            document.getElementById("fotoPerfilMain").src = imagemBase64;
+            novaImagemBase64 = e.target.result;
+            fotoPerfilHeader.src = novaImagemBase64;
+            fotoPerfilMain.src = novaImagemBase64;
         };
         reader.readAsDataURL(file);
     }
-});
 
-// Ação ao clicar no botão "Edite sua foto"
-function editarFoto() {
-    document.getElementById("inputFoto").click();
-}
 
-// Salva as alterações do perfil
-function salvarPerfil() {
-    if (!verificarLogin()) return;
+    async function salvarPerfil(event) {
+        event.preventDefault(); 
 
-    const usuarioLogadoId = sessionStorage.getItem("usuarioLogadoId");
+        const login = loginInput.value.trim();
+        const email = emailInput.value.trim();
+        const senha = senhaInput.value;
 
-    const login = document.getElementById("login").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const senha = document.getElementById("senha").value;
+        if (!login || !email || !senha) {
+            alert("Por favor, preencha todos os campos: Nome, Email e Senha.");
+            return;
+        }
+        
+        const fotoParaSalvar = novaImagemBase64 || usuarioLogado.foto;
 
-    if (!login || !email || !senha) {
-        alert("Por favor, preencha todos os campos: Nome, Email e Senha.");
-        return;
-    }
+        const dadosParaAtualizar = {
+            login,
+            email,
+            senha,
+            foto: fotoParaSalvar
+        };
 
-    // Validação de email simples
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        alert("Por favor, insira um email válido.");
-        return;
-    }
+        try {
+            const resposta = await fetch(`${API_BASE_URL}/usuarios/${usuarioId}`, {
+                method: "PATCH", 
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(dadosParaAtualizar)
+            });
 
-    const fotoParaSalvar = imagemBase64 || document.getElementById("fotoPerfilMain").src;
-
-    const dadosAtualizados = {
-        login,
-        email,
-        senha,
-        foto: fotoParaSalvar
-    };
-
-    fetch(`${apiUrl}/${usuarioLogadoId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dadosAtualizados)
-    })
-        .then(res => {
-            if (!res.ok) {
-                throw new Error(res.status === 404 ? "Usuário não encontrado para atualização." : "Erro ao atualizar perfil.");
+            if (!resposta.ok) {
+                throw new Error("Erro ao atualizar o perfil no servidor.");
             }
-            return res.json();
-        })
-        .then(() => {
+
+            const usuarioAtualizado = await resposta.json();
+
+
+            sessionStorage.setItem('usuario', JSON.stringify(usuarioAtualizado));
+
             alert("Perfil atualizado com sucesso!");
-        })
-        .catch(err => {
+            novaImagemBase64 = ""; 
+
+        } catch (err) {
             console.error("Erro ao salvar perfil:", err);
             alert("Erro ao salvar perfil: " + err.message);
-        });
+        }
+    }
 
-        const btnSair = document.getElementById("btn-sair");
+
+
+    document.getElementById("btnEditarFoto")?.addEventListener("click", () => fotoInput.click()); 
+
+    fotoInput.addEventListener("change", handleSelecaoDeFoto);
+
+    form?.addEventListener('submit', salvarPerfil);
+    
     if (btnSair) {
         btnSair.addEventListener("click", function (event) {
+            event.preventDefault();
             alert("Você foi desconectado com sucesso!");
-            event.preventDefault(); 
-            sessionStorage.clear(); 
-            window.location.href = '/index.html'; 
+            sessionStorage.clear();
+            window.location.href = '/login.html'; 
         });
-    } else {
-        console.error("Botão 'btn-sair' não encontrado.");
     }
-}
+
+
+    preencherDadosIniciais();
+
+});
