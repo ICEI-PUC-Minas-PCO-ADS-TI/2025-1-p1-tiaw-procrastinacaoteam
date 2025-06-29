@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+    alert("VERSÃO NOVA DO SCRIPT CARREGADA - 29/06!");
 
     const API_BASE_URL = 'https://procrastinacao.glitch.me';
 
