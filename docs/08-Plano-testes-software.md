@@ -20,13 +20,13 @@ Por exemplo:
 
 <br>
 
-| **Caso de teste**  | **CT-002 – Efetuar login**  |
+| **Caso de teste**  | **CT-002 – Inserir tarefas **  |
 |:---: |:---: |
-| Requisito associado | RF-00Y - A aplicação deve possuir opção de fazer login, sendo o login o endereço de e-mail. |
-| Objetivo do teste | Verificar se o usuário consegue realizar login. |
-| Passos | - Acessar o navegador <br> - Informar o endereço do site https://adota-pet.herokuapp.com/src/index.html <br> - Clicar no botão "Entrar" <br> - Preencher o campo de e-mail <br> - Preencher o campo de senha <br> - Clicar em "Login" |
-| Critério de êxito | - O login foi realizado com sucesso. |
-| Responsável pela elaboração do caso de teste | Nome do integrante da equipe. |
+| Requisito associado | RF-00Y - Necessário acesso ao site, com login e senha já cadastrados. |
+| Objetivo do teste | Verificar se a funcionalidade de inserir tarefas está funcionando normalmente. |
+| Passos | - Acessar o navegador <br> - Informar o endereço do site https://actionmode.online/index.html <br> - Fazer Login <br> - Acessar a aba "Calendário", na aba lateral <br> - Ir em "Inserir tarefas" <br> - Preencher os campos necessários <br> - Clicar em "Adicionar" |
+| Critério de êxito | - Alerta de "Tarefa salva com sucesso!" e tarefa sendo constada nas abas "Calendário" e "Progresso" |
+| Responsável pela elaboração do caso de teste | Vinicius Muniz |
 
 
 ## Ferramentas de testes (opcional)
