@@ -10,7 +10,7 @@ Não deixe de enumerar os casos de teste de forma sequencial e garantir que o(s)
 
 Por exemplo:
 
-| **Caso de teste**  | **CT-001 – Login de usuário**  |
+| **Caso de teste**  | **CT-001 – Login de usuário** |
 |:---: |:---: |
 | Requisito associado | RF-00X - A página inicial do site deverá conter, no canto superior direito, a aba "Login". |
 | Objetivo do teste | Verificar se o login funciona de acordo com o necessário. |
@@ -20,12 +20,22 @@ Por exemplo:
 
 <br>
 
-| **Caso de teste**  | **CT-002 – Inserir tarefas **  |
+| **Caso de teste**  | **CT-002 – Inserir tarefas**   |
 |:---: |:---: |
 | Requisito associado | RF-00Y - Necessário acesso ao site, com login e senha já cadastrados. |
 | Objetivo do teste | Verificar se a funcionalidade de inserir tarefas está funcionando normalmente. |
 | Passos | - Acessar o navegador <br> - Informar o endereço do site https://actionmode.online/index.html <br> - Fazer Login <br> - Acessar a aba "Calendário", na aba lateral <br> - Ir em "Inserir tarefas" <br> - Preencher os campos necessários <br> - Clicar em "Adicionar" |
 | Critério de êxito | - Alerta de "Tarefa salva com sucesso!" e tarefa sendo constada nas abas "Calendário" e "Progresso" |
+| Responsável pela elaboração do caso de teste | Vinicius Muniz |
+
+<br>
+
+| **Caso de teste**  | **CT-003 – Assinalar tarefas concluídas **  |
+|:---: |:---: |
+| Requisito associado | RF-00Y - Necessário acesso ao site e inclusão de tarefas pela aba "Calendário"  |
+| Objetivo do teste | Verificar sistema de pontos e alteração de tarefas pendentes para concluídas |
+| Passos | - Acessar o navegador <br> - Informar o endereço do site https://actionmode.online/index.html <br> - Fazer Login <br> - Acessar a aba "Missões" <br> - Selecionar data informada anteriormente no cadastro de tarefas <br> - Marcar o checkbox da tarefa |
+| Critério de êxito | - Alteração de campo da tarefa de "Pendente" para "Concluída" na aba "Progresso" do site |
 | Responsável pela elaboração do caso de teste | Vinicius Muniz |
 
 
