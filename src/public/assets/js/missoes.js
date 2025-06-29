@@ -6,11 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const usuarioLogadoString = sessionStorage.getItem('usuario');
     if (!usuarioLogadoString) {
         alert('Sessão não encontrada. Por favor, faça o login.');
-        window.location.href = "login.html"; 
-        return;
+        window.location.href = "/login.html"; 
+        return; 
     }
     const usuarioLogado = JSON.parse(usuarioLogadoString);
     const usuarioId = usuarioLogado.id;
+
 
     const caminhoDasMissoes = document.getElementById('missao-caminho');
     const cabecalhoMesAno = document.getElementById('currentMonthYear');
@@ -19,8 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const listaDeTarefas = document.getElementById('lista-tarefas-dia');
     const caminhoSvg = document.getElementById('caminho-svg');
     const pontosSpan = document.querySelector('.pontos');
-
-    let todasAsTarefas = [];
+    let tarefasSalvas = [];
     let dataAtual = new Date();
     let ultimoDiaClicado = null;
     const diasDaSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
@@ -28,337 +28,68 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    async function iniciarPagina() {
-        if (pontosSpan) {
-            pontosSpan.textContent = `🔥 ${usuarioLogado.pontuacao || 0}`;
-        }
-        
+    async function fetchTarefas() {
+        if (!usuarioId) return;
         try {
             const resposta = await fetch(`${API_BASE_URL}/tarefas?usuarioId=${usuarioId}`);
-            todasAsTarefas = await resposta.json();
-            desenharCalendario(dataAtual);
-        } catch (error) {
-            console.error("Erro ao buscar tarefas:", error);
-            alert("Não foi possível carregar as tarefas do servidor.");
-        }
-    }
-
-    async function gerarTarefasParaMesAtual(usuarioId, tarefasBase) {
-        const hoje = new Date();
-        const ano = hoje.getFullYear();
-        const mes = hoje.getMonth();
-        const totalDias = new Date(ano, mes + 1, 0).getDate();
-
-        const tarefasDistribuidas = [];
-        const diasUsados = new Set();
-
-        const tarefasEmbaralhadas = [...tarefasBase].sort(() => Math.random() - 0.5);
-
-        for (let i = 0; i < tarefasEmbaralhadas.length; i++) {
-            let diaAleatorio;
-            let tentativas = 0;
-            // Garante que o loop não seja infinito se todos os dias já estiverem em uso
-            do {
-                diaAleatorio = Math.floor(Math.random() * totalDias) + 1;
-                tentativas++;
-                if (tentativas > totalDias * 2) { // Adiciona um limite de tentativas
-                    console.warn('Não foi possível encontrar um dia único para atribuir a tarefa. Redistribuindo tarefas.');
-                    // Poderíamos adicionar lógica para reatribuir ou parar aqui
-                    break; 
-                }
-            } while (diasUsados.has(diaAleatorio) && diasUsados.size < totalDias);
-
-            if (tentativas > totalDias * 2) break; // Sai do loop externo se não encontrar dia
-
-            diasUsados.add(diaAleatorio);
-
-            const dataListada = `${ano}-${String(mes + 1).padStart(2, '0')}-${String(diaAleatorio).padStart(2, '0')}`;
-            const tarefaObj = {
-                usuarioId: usuarioId,
-                DataListada: dataListada,
-                itens: [{
-                    TarefasListada: tarefasEmbaralhadas[i].titulo,
-                    nivelImportancia: ['Baixa', 'Media', 'Alta'][Math.floor(Math.random() * 3)],
-                    concluida: false
-                }]
-            };
-
-            tarefasDistribuidas.push(tarefaObj);
-        }
-
-        for (const tarefa of tarefasDistribuidas) {
-            try {
-                await fetch('http://localhost:3000/tarefas', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(tarefa)
-                });
-            } catch (error) {
-                console.error("Erro ao salvar tarefa no servidor:", tarefa, error);
-            }
-        }
-
-        console.log("Tarefas geradas para o mês atual.");
-    }
-
-    async function verificarOuGerarTarefasMensais() {
-        try {
-            const resposta = await fetch(`http://localhost:3000/tarefas?usuarioId=${usuarioId}`);
-            if (!resposta.ok) throw new Error('Falha ao buscar tarefas existentes.');
-            const tarefasExistentes = await resposta.json();
-            const mesAtual = new Date().toISOString().slice(0, 7); 
-
-            const possuiTarefaNoMesAtual = tarefasExistentes.some(tarefa =>
-                tarefa.DataListada && tarefa.DataListada.startsWith(mesAtual)
-            );
-
-            if (!possuiTarefaNoMesAtual) {
-                console.log("Nenhuma tarefa encontrada para o mês atual, gerando novas tarefas...");
-                await gerarTarefasParaMesAtual(usuarioId, usuarioLogado.tarefas || []);
-                await fetchTarefas(); 
-                desenharCalendario(dataAtual); 
-                calcularEMostrarPontos();
-            } else {
-                console.log("Tarefas já existem para o mês atual.");
-            }
+            tarefasSalvas = await resposta.json();
         } catch (erro) {
-            console.error("Erro ao verificar ou gerar tarefas:", erro);
+            console.error("Erro ao buscar tarefas do usuário:", erro);
+            tarefasSalvas = [];
         }
     }
 
-    botaoRegenerar?.addEventListener('click', async () => {
-        if (!confirm('Tem certeza que deseja regenerar as tarefas do mês atual? Isso apagará as tarefas existentes para este mês.')) {
-            return;
-        }
-
-        try {
-            const mesAtual = new Date().toISOString().slice(0, 7);
-            const resposta = await fetch(`http://localhost:3000/tarefas?usuarioId=${usuarioId}`);
-            if (!resposta.ok) throw new Error('Falha ao buscar tarefas para regeneração.');
-            const tarefas = await resposta.json();
-            const tarefasDoMes = tarefas.filter(t => t.DataListada?.startsWith(mesAtual));
-
-            // Deleta todas as tarefas do mês atual
-            for (const tarefa of tarefasDoMes) {
-                await fetch(`http://localhost:3000/tarefas/${tarefa.id}`, {
-                    method: 'DELETE'
-                });
-            }
-
-            // Gera novas tarefas
-            await gerarTarefasParaMesAtual(usuarioId, usuarioLogado.tarefas || []);
-            await fetchTarefas(); // Atualiza tarefasSalvas localmente
-            desenharCalendario(dataAtual); // Redesenha o calendário com as novas tarefas
-            calcularEMostrarPontos(); // Recalcula e mostra os pontos
-
-            alert('Tarefas regeneradas com sucesso!');
-
-        } catch (erro) {
-            console.error("Erro ao regenerar tarefas:", erro);
-            alert('Erro ao regenerar tarefas. Verifique o console.');
-        }
-    });
-
-    function desenharCalendario(dataParaDesenhar) {
-        caminhoDasMissoes.innerHTML = '';
-        esconderDetalhes();
-
-        const ano = dataParaDesenhar.getFullYear();
-        const mes = dataParaDesenhar.getMonth();
-        cabecalhoMesAno.textContent = `${mesesDoAno[mes]} de ${ano}`;
-        const hojeFormatado = formatarData(new Date());
-        const totalDiasNoMes = new Date(ano, mes + 1, 0).getDate();
-        
-        // Verifica a largura do contêiner para posicionamento, aguarda se for 0
-        const containerLargura = caminhoDasMissoes.offsetWidth;
-        if (containerLargura === 0) return;
-
-        const posicoesX = [0.2, 0.5, 0.8];
-        let y = 80;
-
-        for (let i = 1; i <= totalDiasNoMes; i++) {
-            const dataDoLoop = new Date(ano, mes, i);
-            const dataNoFormatoTexto = formatarData(dataDoLoop);
-            
-            const temTarefas = todasAsTarefas.some(t => t.DataListada === dataNoFormatoTexto);
-
-            if (temTarefas) {
-                 const circuloDoDia = document.createElement('div');
-                circuloDoDia.className = 'circulo-dia';
-                circuloDoDia.dataset.fullDate = dataNoFormatoTexto;
-                
-                const x = containerLargura * posicoesX[(caminhoDasMissoes.childElementCount) % posicoesX.length];
-                circuloDoDia.style.left = `${x - 40}px`;
-                circuloDoDia.style.top = `${y - 40}px`;
-                y += 120; 
-
-                circuloDoDia.innerHTML = `
-                    <span class="dia-semana-label">${diasDaSemana[dataDoLoop.getDay()]}</span>
-                    <span class="dia-numero-label">${i}</span>
-                `;
-
-                circuloDoDia.classList.add('com-tarefas');
-                if (dataNoFormatoTexto === hojeFormatado) circuloDoDia.classList.add('dia-atual');
-
-                circuloDoDia.addEventListener('click', (evento) => {
-                    evento.stopPropagation();
-                    if (ultimoDiaClicado) ultimoDiaClicado.classList.remove('selecionado');
-                    circuloDoDia.classList.add('selecionado');
-                    ultimoDiaClicado = circuloDoDia;
-                    mostrarTarefasDoDia(dataNoFormatoTexto, circuloDoDia);
-                });
-                caminhoDasMissoes.appendChild(circuloDoDia);
-            }
-        }
-        
-        caminhoDasMissoes.parentElement.style.height = `${y}px`;
-        desenharLinhasDoCaminho();
-    }
-
-
-    function desenharLinhasDoCaminho() {
-        const circulos = Array.from(document.querySelectorAll('.circulo-dia'));
-        caminhoSvg.innerHTML = '';
-        if (circulos.length < 2) return;
-        
-        let pathData = `M ${circulos[0].offsetLeft + 40} ${circulos[0].offsetTop + 40}`;
-        for (let i = 0; i < circulos.length - 1; i++) {
-            const [start, end] = [circulos[i], circulos[i+1]];
-            const [x1, y1] = [start.offsetLeft + 40, start.offsetTop + 40];
-            const [x2, y2] = [end.offsetLeft + 40, end.offsetTop + 40];
-            pathData += ` C ${x1} ${y1 + 60}, ${x2} ${y2 - 60}, ${x2} ${y2}`;
-        }
-        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        path.setAttribute('d', pathData);
-        path.setAttribute('stroke', 'rgba(255, 255, 255, 0.5)');
-        path.setAttribute('stroke-width', '6');
-        path.setAttribute('fill', 'none');
-        path.setAttribute('stroke-dasharray', '10, 10');
-        caminhoSvg.appendChild(path);
-    }
-
-    function mostrarTarefasDoDia(dataNoFormatoTexto, elementoCirculo) {
-        textoDataSelecionada.textContent = new Date(dataNoFormatoTexto + "T00:00:00").toLocaleDateString('pt-BR');
-        listaDeTarefas.innerHTML = '';
-        const tarefasDoDia = todasAsTarefas.filter(t => t.DataListada === dataNoFormatoTexto);
-
-        tarefasDoDia.forEach(itemDia => {
-            if(itemDia.itens) {
-                itemDia.itens.forEach((tarefa) => {
-                    const li = document.createElement('li');
-                    li.className = `imp-${tarefa.nivelImportancia.toLowerCase()}`;
-                    li.innerHTML = `
-                        <input type="checkbox" id="task-${itemDia.id}-${tarefa.TarefasListada}" ${tarefa.concluida ? 'checked' : ''}>
-                        <label for="task-${itemDia.id}-${tarefa.TarefasListada}">${tarefa.TarefasListada}</label>
-                    `;
-                    li.querySelector('input').addEventListener('change', async function() {
-                        await marcarTarefaCompleta(itemDia.id, tarefa, this.checked);
-                    });
-                    listaDeTarefas.appendChild(li);
-                });
-            }
-        });
-        
-        posicionarCaixaDetalhes(elementoCirculo);
-    }
-
-
-    async function marcarTarefaCompleta(diaId, tarefa, novoStatus) {
-        const diaParaAtualizar = todasAsTarefas.find(d => d.id === diaId);
-        const tarefaParaAtualizar = diaParaAtualizar.itens.find(t => t.TarefasListada === tarefa.TarefasListada);
-        
-        if (tarefaParaAtualizar) {
-            tarefaParaAtualizar.concluida = novoStatus;
-            
-            try {
-                await fetch(`${API_BASE_URL}/tarefas/${diaId}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(diaParaAtualizar)
-                });
-                await calcularEMostrarPontos();
-            } catch (error) {
-                console.error("Erro ao atualizar tarefa:", error);
-            }
-        }
-    }
-
-
-    async function calcularEMostrarPontos() {
+     async function calcularEMostrarPontos() {
+        if (!usuarioId) return;
         let pontuacao = 0;
         const sistemaDePontos = { 'baixa': 3, 'media': 5, 'alta': 8 };
 
-        todasAsTarefas.forEach(itemDia => {
-            itemDia.itens.forEach(tarefa => {
-                if (tarefa.concluida) {
-                    pontuacao += sistemaDePontos[tarefa.nivelImportancia.toLowerCase()] || 0;
+        try {
+            const res = await fetch(`${API_BASE_URL}/tarefas?usuarioId=${usuarioId}`);
+            const tarefasAtuais = await res.json();
+            tarefasSalvas = tarefasAtuais;
+
+            tarefasAtuais.forEach(itemDia => {
+                if (itemDia.itens) {
+                    itemDia.itens.forEach(tarefa => {
+                        if (tarefa.concluida) {
+                            const importancia = tarefa.nivelImportancia ? tarefa.nivelImportancia.toLowerCase() : '';
+                            pontuacao += sistemaDePontos[importancia] || 0;
+                        }
+                    });
                 }
             });
-        });
-        
-        if (pontosSpan) {
-            pontosSpan.textContent = `🔥 ${pontuacao}`;
-        }
-        
-        const usuarioAtualizado = { ...usuarioLogado, pontuacao: pontuacao };
-        await fetch(`${API_BASE_URL}/usuarios/${usuarioId}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(usuarioAtualizado)
-        });
-        sessionStorage.setItem('usuario', JSON.stringify(usuarioAtualizado));
-    }
-
-
-
-    function formatarData(data) {
-        const [ano, mes, dia] = [data.getFullYear(), String(data.getMonth() + 1).padStart(2, '0'), String(data.getDate()).padStart(2, '0')];
-        return `${ano}-${mes}-${dia}`;
-    }
-
-    function esconderDetalhes() {
-        caixaDetalhes.style.opacity = 0;
-        setTimeout(() => {
-            caixaDetalhes.style.display = 'none';
-            if (ultimoDiaClicado) {
-                ultimoDiaClicado.classList.remove('selecionado');
-                ultimoDiaClicado = null;
+            if (pontosSpan) {
+                pontosSpan.textContent = `🔥 ${pontuacao}`;
             }
-        }, 300);
-    }
-    
-    function posicionarCaixaDetalhes(elementoCirculo) {
-        caixaDetalhes.style.display = 'block';
-        const posCirculo = elementoCirculo.getBoundingClientRect();
-        const posContainer = document.getElementById('missao-caminho-container').getBoundingClientRect();
-        let top = posCirculo.top - posContainer.top + (posCirculo.height / 2) - (caixaDetalhes.offsetHeight / 2);
-        let left;
-        if ((posCirculo.right + caixaDetalhes.offsetWidth + 20) < window.innerWidth) {
-            left = posCirculo.right - posContainer.left + 20;
-        } else {
-            left = posCirculo.left - posContainer.left - caixaDetalhes.offsetWidth - 20;
+            await atualizarPontosDoUsuario(usuarioId, pontuacao);
+        } catch (error) {
+            console.error("Erro ao calcular pontos:", error);
         }
-        if (top < 0) top = 10;
-        caixaDetalhes.style.top = `${top}px`;
-        caixaDetalhes.style.left = `${left}px`;
-        caixaDetalhes.style.opacity = 1;
     }
 
-    document.querySelector('#prevMonth')?.addEventListener('click', () => {
-        dataAtual.setMonth(dataAtual.getMonth() - 1);
-        desenharCalendario(dataAtual);
-    });
+    async function atualizarPontosDoUsuario(id, pontuacao) {
+        try {
+            let respostaUsuario = await fetch(`${API_BASE_URL}/usuarios/${id}`);
+            if (!respostaUsuario.ok) return;
+            const usuario = await respostaUsuario.json();
+            usuario.pontuacao = pontuacao;
 
-    document.querySelector('#nextMonth')?.addEventListener('click', () => {
-        dataAtual.setMonth(dataAtual.getMonth() + 1);
-        desenharCalendario(dataAtual);
-    });
-    
-    document.addEventListener('click', (e) => {
-        if (!caixaDetalhes.contains(e.target) && !e.target.closest('.circulo-dia')) {
-            esconderDetalhes();
+            await fetch(`${API_BASE_URL}/usuarios/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(usuario),
+            });
+            sessionStorage.setItem('usuario', JSON.stringify(usuario));
+        } catch (erro) {
+            console.error("Erro ao atualizar a pontuação do usuário:", erro);
         }
-    });
+    }
 
-    iniciarPagina();
+
+    fetchTarefas().then(() => {
+        setTimeout(() => {
+            calcularEMostrarPontos();
+        }, 100);
+    });
 });
