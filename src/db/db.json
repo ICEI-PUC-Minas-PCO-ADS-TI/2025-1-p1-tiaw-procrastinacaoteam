@@ -222,6 +222,30 @@
         }
       ],
       "usuarioId": 1
+    },
+    {
+      "id": "acf6",
+      "DataListada": "2025-06-24",
+      "itens": [
+        {
+          "TarefasListada": "fogo",
+          "nivelImportancia": "Alta",
+          "concluida": false
+        }
+      ],
+      "usuarioId": null
+    },
+    {
+      "id": "82ae",
+      "DataListada": "2025-06-30",
+      "usuarioId": "5",
+      "itens": [
+        {
+          "TarefasListada": "Forças",
+          "nivelImportancia": "Media",
+          "concluida": false
+        }
+      ]
     }
   ],
   "avaliacoes": [
