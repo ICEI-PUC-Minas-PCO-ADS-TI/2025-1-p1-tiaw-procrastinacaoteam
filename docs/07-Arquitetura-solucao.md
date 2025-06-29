@@ -150,10 +150,10 @@ Esta seção apresenta os módulos e APIs utilizados na solução.
 
 ## Hospedagem
 
-Optamos por utilizar os serviços de hospedagem da HostGator, que dispõe de um painel de controle fácil e prático para exibição dos arquivos de nosso projeto, bem como um serviço de domínio que possibilita de nosso site estar disponível para acesso na internet.
+Optamos por utilizar os serviços de hospedagem da HostGator, que dispõe de um painel de controle fácil e prático para exibição dos arquivos de nosso projeto, bem como um serviço de domínio que possibilita de nosso site estar disponível para acesso na internet. Porém, como a HostGator não dispunha de uma plataforma para hospedarmos também nosso JSON server, utilizamos a plataforma Glitch para a hospedagem do mesmo. 
 
 > **Links úteis**:
-> - [Website com GitHub Pages](https://pages.github.com/)
-> - [Programação colaborativa com Repl.it](https://repl.it/)
-> - [Getting started with Heroku](https://devcenter.heroku.com/start)
-> - [Publicando seu site no Heroku](http://pythonclub.com.br/publicando-seu-hello-world-no-heroku.html)
+> - [Glitch - Server JSON](https://glitch.com/edit/#!/procrastinacao)
+> - [HostGator - Hospedagem do site](https://cliente.hostgator.com.br/inicio)
+
+

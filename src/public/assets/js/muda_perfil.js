@@ -119,4 +119,16 @@ function salvarPerfil() {
             console.error("Erro ao salvar perfil:", err);
             alert("Erro ao salvar perfil: " + err.message);
         });
+
+        const btnSair = document.getElementById("btn-sair");
+    if (btnSair) {
+        btnSair.addEventListener("click", function (event) {
+            alert("Você foi desconectado com sucesso!");
+            event.preventDefault(); 
+            sessionStorage.clear(); 
+            window.location.href = '/index.html'; 
+        });
+    } else {
+        console.error("Botão 'btn-sair' não encontrado.");
+    }
 }

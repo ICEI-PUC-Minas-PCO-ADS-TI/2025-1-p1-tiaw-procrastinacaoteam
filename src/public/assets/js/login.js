@@ -52,4 +52,16 @@ document.getElementById('formlogin').addEventListener('submit', async (event) =>
 
 document.getElementById('btn2').addEventListener('click', () => {
     window.location.href = 'cadastro.html';
+
+const btnSair = document.getElementById("btn-sair");
+    if (btnSair) {
+        btnSair.addEventListener("click", function (event) {
+            alert("Você foi desconectado com sucesso!");
+            event.preventDefault(); 
+            sessionStorage.clear(); 
+            window.location.href = '/index.html'; 
+        });
+    } else {
+        console.error("Botão 'btn-sair' não encontrado.");
+    }
 });

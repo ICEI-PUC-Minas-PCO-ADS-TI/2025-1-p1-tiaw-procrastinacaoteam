@@ -1,142 +1,195 @@
-let nivelImportancia = null;
-
-function scrollCarrosselLeft() {
-  document.getElementById('criaCard').scrollBy({ left: -270, behavior: 'smooth' });
-}
-
-function scrollCarrosselRight() {
-  document.getElementById('criaCard').scrollBy({ left: 270, behavior: 'smooth' });
-}
-
-function handleDeleteClick() {
-  const idData = this.getAttribute('data-id-data');
-  const indexTarefa = parseInt(this.getAttribute('data-index-tarefa'));
-
-  if (!confirm('Tem certeza que deseja deletar esta tarefa?')) return;
-
-  fetch(`http://localhost:3000/tarefas/${idData}`)
-    .then(res => res.json())
-    .then(dia => {
-      if (dia && Array.isArray(dia.itens)) {
-        dia.itens.splice(indexTarefa, 1);
-        if (dia.itens.length === 0) {
-          return fetch(`http://localhost:3000/tarefas/${idData}`, { method: 'DELETE' });
-        } else {
-          return fetch(`http://localhost:3000/tarefas/${idData}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(dia)
-          });
-        }
-      }
-    })
-    .then(() => {
-      const usuario = JSON.parse(sessionStorage.getItem('usuario'));
-      exibirTarefas(usuario.id);
-      alert('Tarefa deletada com sucesso!');
-    });
-}
-
-function exibirTarefas(usuarioId) {
-  const container = document.getElementById('criaCard');
-  container.innerHTML = '';
-
-  fetch(`http://localhost:3000/tarefas?usuarioId=${usuarioId}`)
-    .then(res => res.json())
-    .then(dados => {
-      dados.sort((a, b) => new Date(a.DataListada) - new Date(b.DataListada));
-      dados.forEach(dia => {
-        dia.itens.forEach((tarefa, index) => {
-          const card = document.createElement('div');
-          card.classList.add('card-tarefa');
-          card.classList.add(`imp-${tarefa.nivelImportancia.toLowerCase()}`);
-
-          const dataFormatada = new Date(dia.DataListada + "T00:00:00").toLocaleDateString('pt-BR');
-
-          card.innerHTML = `
-            <div class="CardCarrossel">
-              <h3>${tarefa.TarefasListada}</h3>
-              <p>Data: ${dataFormatada}</p>
-              <p>Importância: ${tarefa.nivelImportancia}</p>
-              <button class="btn-deletar" data-id-data="${dia.id}" data-index-tarefa="${index}">Deletar</button>
-            </div>
-          `;
-          container.appendChild(card);
-        });
-      });
-
-      document.getElementById('anterior').onclick = scrollCarrosselLeft;
-      document.getElementById('proximo').onclick = scrollCarrosselRight;
-
-      document.querySelectorAll('.btn-deletar').forEach(button => {
-        button.onclick = handleDeleteClick;
-      });
-    })
-    .catch(() => alert('Erro ao carregar tarefas. Verifique se o JSON Server está rodando.'));
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-  const usuario = JSON.parse(sessionStorage.getItem('usuario'));
 
-  if (!usuario || !usuario.id) {
-    alert('Sessão expirada. Faça login novamente.');
-    window.location.href = "/login.html";
-    return;
-  }
+    const form = document.getElementById('AddTarefas');
+    const inputDescricao = document.getElementById('Entrada');
+    const inputData = document.getElementById('EntradaData');
+    const carrosselContainer = document.getElementById('criaCard');
+    const btnLimpar = document.getElementById('btnCancelar');
+    const btnAnterior = document.getElementById('anterior');
+    const btnProximo = document.getElementById('proximo');
 
-  exibirTarefas(usuario.id);
+    const usuarioLogadoString = sessionStorage.getItem('usuario');
+    if (!usuarioLogadoString) {
+        alert('Sessão não encontrada. Por favor, faça o login.');
+        window.location.href = "../../modulos/login/login.html";
+        return;
+    }
+    const usuarioLogado = JSON.parse(usuarioLogadoString);
+    const usuarioId = usuarioLogado.id;
 
-  document.querySelector('.inputs-importancia').addEventListener('change', e => {
-    if (e.target.checked) nivelImportancia = e.target.value;
-  });
 
-  document.getElementById('AddTarefas').addEventListener('submit', e => {
-    e.preventDefault();
 
-    const tarefa = document.getElementById("Entrada").value.trim();
-    const data = document.getElementById("EntradaData").value;
+    async function exibirTarefas() {
+        try {
+            const resposta = await fetch(`http://localhost:3000/tarefas?usuarioId=${usuarioId}`);
+            const tarefas = await resposta.json();
 
-    if (!tarefa || !data || !nivelImportancia) {
-      alert('Por favor, preencha todos os campos e selecione a importância.');
-      return;
+            carrosselContainer.innerHTML = ''; 
+
+            if (tarefas.length === 0) {
+                carrosselContainer.innerHTML = '<p class="aviso-sem-tarefas">Nenhuma tarefa cadastrada ainda.</p>';
+                return;
+            }
+
+            tarefas.sort((a, b) => new Date(a.DataListada) - new Date(b.DataListada));
+
+            tarefas.forEach(dia => {
+                if (dia.itens) {
+                    dia.itens.forEach((tarefa, index) => {
+                        const card = document.createElement('div');
+                        card.className = 'card-tarefa';
+                        if (tarefa.nivelImportancia) {
+                            card.classList.add(`imp-${tarefa.nivelImportancia.toLowerCase()}`);
+                        }
+                        
+                        const dataFormatada = new Date(dia.DataListada + "T00:00:00").toLocaleDateString('pt-BR');
+                        
+                        card.innerHTML = `
+                            <h4>${tarefa.TarefasListada}</h4>
+                            <p>Data: ${dataFormatada}</p>
+                            <p>Importância: ${tarefa.nivelImportancia}</p>
+                            <button class="btn-deletar" data-id="${dia.id}" data-index="${index}">Deletar</button>
+                        `;
+                        carrosselContainer.appendChild(card);
+                    });
+                }
+            });
+        } catch (error) {
+            console.error('Erro ao exibir tarefas:', error);
+            alert('Não foi possível carregar as tarefas. Verifique o servidor.');
+        }
     }
 
-    // Aqui você pode querer verificar se já existe uma tarefa para esse usuário na mesma data
-    // e então atualizar a lista (PUT) ao invés de criar um novo registro (POST).
-    // Mas para simplificar, vamos criar sempre um novo registro:
 
-    const dadosParaEnviar = {
-      DataListada: data,
-      itens: [{
-        TarefasListada: tarefa,
-        nivelImportancia,
-        concluida: false
-      }],
-      usuarioId: parseInt(usuario.id)
-    };
+    async function adicionarTarefa(event) {
+        event.preventDefault();
 
-    fetch('http://localhost:3000/tarefas', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dadosParaEnviar)
-    })
-      .then(res => {
-        if (!res.ok) throw new Error('Erro ao salvar a tarefa');
-        return res.json();
-      })
-      .then(() => {
-        alert('Tarefa adicionada com sucesso!');
-        document.getElementById('AddTarefas').reset();
-        nivelImportancia = null;
-        document.querySelectorAll('.inputs-importancia input[type="radio"]').forEach(r => r.checked = false);
-        exibirTarefas(usuario.id);
-      })
-      .catch(erro => alert('Erro ao adicionar tarefa: ' + erro.message));
-  });
+        const descricao = inputDescricao.value.trim();
+        const data = inputData.value;
+        const importanciaInput = document.querySelector('input[name="importancia"]:checked');
 
-  document.getElementById('btnCancelar').addEventListener('click', () => {
-    document.getElementById('AddTarefas').reset();
-    nivelImportancia = null;
-    document.querySelectorAll('.inputs-importancia input[type="radio"]').forEach(r => r.checked = false);
-  });
+        if (!descricao || !data || !importanciaInput) {
+            alert('Por favor, preencha todos os campos e selecione a importância.');
+            return;
+        }
+
+        const importancia = importanciaInput.value;
+
+        try {
+            const respostaBusca = await fetch(`http://localhost:3000/tarefas?usuarioId=${usuarioId}&DataListada=${data}`);
+            const diaExistente = await respostaBusca.json();
+
+            const novoItem = {
+                TarefasListada: descricao,
+                nivelImportancia: importancia,
+                concluida: false
+            };
+
+            let acaoFinal;
+
+            if (diaExistente.length > 0) {
+                const diaParaAtualizar = diaExistente[0];
+                diaParaAtualizar.itens.push(novoItem);
+
+                acaoFinal = fetch(`http://localhost:3000/tarefas/${diaParaAtualizar.id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(diaParaAtualizar)
+                });
+
+            } else {
+                const novaTarefaDeDia = {
+                    DataListada: data,
+                    usuarioId: usuarioId,
+                    itens: [novoItem]
+                };
+
+                acaoFinal = fetch('http://localhost:3000/tarefas', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(novaTarefaDeDia)
+                });
+            }
+
+            const respostaAcao = await acaoFinal;
+
+            if (respostaAcao.ok) {
+                alert('Tarefa salva com sucesso!');
+                resetarFormulario();
+                await exibirTarefas(); 
+            } else {
+                alert('Ocorreu um erro ao salvar a tarefa.');
+            }
+
+        } catch (error) {
+            console.error('Erro de conexão:', error);
+            alert('Não foi possível se conectar ao servidor.');
+        }
+    }
+
+
+    async function deletarTarefa(tarefaId, index) {
+        if (!confirm('Tem certeza que deseja deletar esta tarefa?')) {
+            return;
+        }
+
+        try {
+            const res = await fetch(`http://localhost:3000/tarefas/${tarefaId}`);
+            if (!res.ok) throw new Error('Tarefa não encontrada no servidor.');
+            
+            const diaParaAtualizar = await res.json();
+
+            diaParaAtualizar.itens.splice(index, 1);
+
+            let acaoFinal;
+            if (diaParaAtualizar.itens.length === 0) {
+                acaoFinal = fetch(`http://localhost:3000/tarefas/${tarefaId}`, { method: 'DELETE' });
+            } else {
+                acaoFinal = fetch(`http://localhost:3000/tarefas/${tarefaId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(diaParaAtualizar)
+                });
+            }
+
+            const respostaAcao = await acaoFinal;
+            if (respostaAcao.ok) {
+                alert('Tarefa deletada com sucesso!');
+                await exibirTarefas(); 
+            } else {
+                alert('Erro ao processar a deleção da tarefa.');
+            }
+        } catch (error) {
+            console.error('Erro ao deletar tarefa:', error);
+        }
+    }
+    
+
+    function resetarFormulario() {
+        form.reset();
+        document.querySelectorAll('input[name="importancia"]').forEach(radio => radio.checked = false);
+    }
+
+
+    form.addEventListener('submit', adicionarTarefa);
+
+    btnLimpar.addEventListener('click', resetarFormulario);
+    
+    carrosselContainer.addEventListener('click', (event) => {
+        if (event.target.matches('.btn-deletar')) {
+            const tarefaId = event.target.dataset.id;
+            const index = parseInt(event.target.dataset.index, 10);
+            deletarTarefa(tarefaId, index);
+        }
+    });
+
+    btnAnterior.addEventListener('click', () => {
+        carrosselContainer.scrollBy({ left: -270, behavior: 'smooth' });
+    });
+    btnProximo.addEventListener('click', () => {
+        carrosselContainer.scrollBy({ left: 270, behavior: 'smooth' });
+    });
+
+
+    exibirTarefas();
 });
