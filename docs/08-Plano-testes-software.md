@@ -10,13 +10,13 @@ Não deixe de enumerar os casos de teste de forma sequencial e garantir que o(s)
 
 Por exemplo:
 
-| **Caso de teste**  | **CT-001 – Cadastrar perfil**  |
+| **Caso de teste**  | **CT-001 – Login de usuário**  |
 |:---: |:---: |
-| Requisito associado | RF-00X - A aplicação deve apresentar, na página principal, a funcionalidade de cadastro de usuários para que estes consigam criar e gerenciar seu perfil. |
-| Objetivo do teste | Verificar se o usuário consegue se cadastrar na aplicação. |
-| Passos | - Acessar o navegador <br> - Informar o endereço do site https://adota-pet.herokuapp.com/src/index.html <br> - Clicar em "Criar conta" <br> - Preencher os campos obrigatórios (e-mail, nome, sobrenome, celular, CPF, senha, confirmação de senha) <br> - Aceitar os termos de uso <br> - Clicar em "Registrar" |
-| Critério de êxito | - O cadastro foi realizado com sucesso. |
-| Responsável pela elaboração do caso de teste | Nome do integrante da equipe. |
+| Requisito associado | RF-00X - A página inicial do site deverá conter, no canto superior direito, a aba "Login". |
+| Objetivo do teste | Verificar se o login funciona de acordo com o necessário. |
+| Passos | - Acessar o navegador <br> - Informar a URL do projeto https://actionmode.online/index.html <br> - Ir em "Login" <br> - Preencher os campos "usuário" e "senha" <br> - Clicar em "Login" <br>  |
+| Critério de êxito | - Alerta com a mensagem "Login bem sucedido!" |
+| Responsável pela elaboração do caso de teste | Vinicius Muniz |
 
 <br>
 
@@ -31,12 +31,5 @@ Por exemplo:
 
 ## Ferramentas de testes (opcional)
 
-Comente sobre as ferramentas de testes utilizadas.
+Para testar as funcionalidades do nosso site, utilizamos os navegadores Google Chrome e Microsoft Edge, além da plataforma HostGator para visualizarmos os resultados.
  
-> **Links úteis**:
-> - [IBM - criação e geração de planos de teste](https://www.ibm.com/developerworks/br/local/rational/criacao_geracao_planos_testes_software/index.html)
-> - [Práticas e técnicas de testes ágeis](http://assiste.serpro.gov.br/serproagil/Apresenta/slides.pdf)
-> - [Teste de software: conceitos e tipos de testes](https://blog.onedaytesting.com.br/teste-de-software/)
-> - [Criação e geração de planos de teste de software](https://www.ibm.com/developerworks/br/local/rational/criacao_geracao_planos_testes_software/index.html)
-> - [Ferramentas de teste para JavaScript](https://geekflare.com/javascript-unit-testing/)
-> - [UX Tools](https://uxdesign.cc/ux-user-research-and-user-testing-tools-2d339d379dc7)
