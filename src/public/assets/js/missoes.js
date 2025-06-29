@@ -33,57 +33,64 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    function desenharCalendario(tarefas, dataParaDesenhar) {
-        caminhoDasMissoes.innerHTML = '';
-        esconderDetalhes();
-        const ano = dataParaDesenhar.getFullYear();
-        const mes = dataParaDesenhar.getMonth();
-        cabecalhoMesAno.textContent = `${mesesDoAno[mes]} de ${ano}`; 
-        const hojeFormatado = formatarData(new Date());
-        const totalDiasNoMes = new Date(ano, mes + 1, 0).getDate();
+function desenharCalendario(tarefas, dataParaDesenhar) {
+    caminhoDasMissoes.innerHTML = '';
+    esconderDetalhes();
+    const ano = dataParaDesenhar.getFullYear();
+    const mes = dataParaDesenhar.getMonth();
+    cabecalhoMesAno.textContent = `${mesesDoAno[mes]} de ${ano}`;
+    const hojeFormatado = formatarData(new Date());
+    const totalDiasNoMes = new Date(ano, mes + 1, 0).getDate();
+    
+    const containerLargura = caminhoDasMissoes.offsetWidth;
+    if (containerLargura === 0) return;
+    const posicoesX = [0.2, 0.5, 0.8];
+    let y = 80;
+
+    const datasComTarefas = new Set(tarefas.map(t => t.DataListada));
+
+    for (let i = 1; i <= totalDiasNoMes; i++) {
+        const dataDoLoop = new Date(ano, mes, i);
+        const dataNoFormatoTexto = formatarData(dataDoLoop);
+
+
+        const circuloDoDia = document.createElement('div');
+        circuloDoDia.className = 'circulo-dia'; 
+        circuloDoDia.dataset.fullDate = dataNoFormatoTexto;
+
+        const x = containerLargura * posicoesX[(i - 1) % posicoesX.length];
+        circuloDoDia.style.left = `${x - 40}px`;
+        circuloDoDia.style.top = `${y - 40}px`;
+        y += 120;
+
+        circuloDoDia.innerHTML = `
+            <span class="dia-semana-label">${diasDaSemana[dataDoLoop.getDay()]}</span>
+            <span class="dia-numero-label">${i}</span>
+        `;
         
-        const containerLargura = caminhoDasMissoes.offsetWidth;
-        if (containerLargura === 0) return;
-        const posicoesX = [0.2, 0.5, 0.8];
-        let y = 80;
 
-        const datasComTarefas = new Set(tarefas.map(t => t.DataListada));
-
-        for (let i = 1; i <= totalDiasNoMes; i++) {
-            const dataDoLoop = new Date(ano, mes, i);
-            const dataNoFormatoTexto = formatarData(dataDoLoop);
-
-            if (datasComTarefas.has(dataNoFormatoTexto)) {
-                const circuloDoDia = document.createElement('div');
-                circuloDoDia.className = 'circulo-dia com-tarefas';
-                circuloDoDia.dataset.fullDate = dataNoFormatoTexto;
-
-                const x = containerLargura * posicoesX[(caminhoDasMissoes.childElementCount) % posicoesX.length];
-                circuloDoDia.style.left = `${x - 40}px`; 
-                circuloDoDia.style.top = `${y - 40}px`; 
-                y += 120;
-
-                circuloDoDia.innerHTML = `
-                    <span class="dia-semana-label">${diasDaSemana[dataDoLoop.getDay()]}</span>
-                    <span class="dia-numero-label">${i}</span>
-                `;
-
-                if (dataNoFormatoTexto === hojeFormatado) circuloDoDia.classList.add('dia-atual');
-
-                circuloDoDia.addEventListener('click', (evento) => {
-                    evento.stopPropagation();
-                    if (ultimoDiaClicado) ultimoDiaClicado.classList.remove('selecionado');
-                    circuloDoDia.classList.add('selecionado');
-                    ultimoDiaClicado = circuloDoDia;
-                    mostrarTarefasDoDia(dataNoFormatoTexto, tarefas, circuloDoDia);
-                });
-                caminhoDasMissoes.appendChild(circuloDoDia);
-            }
+        if (datasComTarefas.has(dataNoFormatoTexto)) {
+            circuloDoDia.classList.add('com-tarefas');
         }
+
+        if (dataNoFormatoTexto === hojeFormatado) {
+            circuloDoDia.classList.add('dia-atual');
+        }
+
+        circuloDoDia.addEventListener('click', (evento) => {
+            evento.stopPropagation();
+            if (ultimoDiaClicado) ultimoDiaClicado.classList.remove('selecionado');
+            circuloDoDia.classList.add('selecionado');
+            ultimoDiaClicado = circuloDoDia;
+            mostrarTarefasDoDia(dataNoFormatoTexto, tarefas, circuloDoDia);
+        });
         
-        caminhoDasMissoes.parentElement.style.height = `${y}px`; 
-        desenharLinhasDoCaminho();
+        caminhoDasMissoes.appendChild(circuloDoDia);
     }
+    
+    caminhoDasMissoes.parentElement.style.height = `${y}px`;
+    desenharLinhasDoCaminho();
+}
 
     function desenharLinhasDoCaminho() {
         const circulos = Array.from(document.querySelectorAll('.circulo-dia'));
