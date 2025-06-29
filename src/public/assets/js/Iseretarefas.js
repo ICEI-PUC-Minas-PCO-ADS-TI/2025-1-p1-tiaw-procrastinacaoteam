@@ -73,30 +73,54 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const novaTarefa = {
-            DataListada: data,
-            usuarioId: usuarioId,
-            itens: [{
-                TarefasListada: descricao,
-                nivelImportancia: importanciaInput.value,
-                concluida: false
-            }]
-        };
+        const importancia = importanciaInput.value;
 
         try {
-            const resposta = await fetch('http://localhost:3000/tarefas', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(novaTarefa)
-            });
+            const respostaBusca = await fetch(`http://localhost:3000/tarefas?usuarioId=${usuarioId}&DataListada=${data}`);
+            const diaExistente = await respostaBusca.json();
 
-            if (resposta.ok) {
-                alert('Tarefa adicionada com sucesso!');
+            const novoItem = {
+                TarefasListada: descricao,
+                nivelImportancia: importancia,
+                concluida: false
+            };
+
+            let acaoFinal;
+
+            if (diaExistente.length > 0) {
+                const diaParaAtualizar = diaExistente[0];
+                diaParaAtualizar.itens.push(novoItem);
+
+                acaoFinal = fetch(`http://localhost:3000/tarefas/${diaParaAtualizar.id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(diaParaAtualizar)
+                });
+
+            } else {
+                const novaTarefaDeDia = {
+                    DataListada: data,
+                    usuarioId: usuarioId,
+                    itens: [novoItem]
+                };
+
+                acaoFinal = fetch('http://localhost:3000/tarefas', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(novaTarefaDeDia)
+                });
+            }
+
+            const respostaAcao = await acaoFinal;
+
+            if (respostaAcao.ok) {
+                alert('Tarefa salva com sucesso!');
                 resetarFormulario();
                 await exibirTarefas(); 
             } else {
                 alert('Ocorreu um erro ao salvar a tarefa.');
             }
+
         } catch (error) {
             console.error('Erro de conexão:', error);
             alert('Não foi possível se conectar ao servidor.');

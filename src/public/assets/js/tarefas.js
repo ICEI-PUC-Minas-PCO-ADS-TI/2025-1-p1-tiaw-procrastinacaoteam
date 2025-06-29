@@ -1,116 +1,118 @@
-const informacoes = [
-    {
-        pontos: 120,
-        semanas: 3,
+document.addEventListener('DOMContentLoaded', () => {
 
-        tarefas: [
-            {
-                id: 20,
-                tipo: 'concluídas',
-                itens: [
-                    { "id": 1, "tarefa": "Arrumar o carro" },
-                    { "id": 2, "tarefa": "Lavar vasilhas" },
-                    { "id": 3, "tarefa": "Estudar DIW" },
-                    { "id": 4, "tarefa": "Consertar geladeira" },
-                    { "id": 5, "tarefa": "Ir para a academia" }
-                ]
-            },
-            {
-                id: 30,
-                tipo: 'pendentes',
-                itens: [
-                    { "id": 6, "tarefa": "Lavar o banheiro" },
-                    { "id": 7, "tarefa": "Enviar relatório mensal" },
-                    { "id": 8, "tarefa": "Comprar ingredientes" },
-                    { "id": 9, "tarefa": "Organizar gavetas" },
-                    { "id": 10, "tarefa": "Remarcar consulta" }
-                ]
-            }
-        ]
+    const usuarioLogadoString = sessionStorage.getItem('usuario');
+    if (!usuarioLogadoString) {
+        alert('Sessão não encontrada. Por favor, faça o login.');
+        window.location.href = "/login.html"; 
+        return;
     }
-];
+    const usuarioLogado = JSON.parse(usuarioLogadoString);
+    const usuarioId = usuarioLogado.id;
 
-// Interação de RETROSPECTO.HTML
-window.onload = function () {
     const tela = document.getElementById('tela');
 
-    for (let i = 0; i < informacoes.length; i++) {
-        const dado = informacoes[i];  // se refere ao meu JSON 
 
-        tela.innerHTML += `
+    async function buscarDadosDoUsuario() {
+        try {
+            return Promise.resolve(usuarioLogado);
+        } catch (error) {
+            console.error("Erro ao ler dados do usuário da sessão:", error);
+            return null;
+        }
+    }
+
+    async function buscarTarefas() {
+        try {
+            const resposta = await fetch(`http://localhost:3000/tarefas?usuarioId=${usuarioId}`);
+            return resposta.ok ? await resposta.json() : [];
+        } catch (error) {
+            console.error("Erro ao buscar tarefas:", error);
+            return [];
+        }
+    }
+
+
+    async function montarPagina() {
+        const [usuario, todasAsTarefas] = await Promise.all([
+            buscarDadosDoUsuario(),
+            buscarTarefas()
+        ]);
+
+        if (!usuario || !tela) {
+            tela.innerHTML = "<h1>Erro ao carregar dados.</h1>";
+            return;
+        }
+
+        const tarefasConcluidas = [];
+        const tarefasPendentes = [];
+
+        todasAsTarefas.forEach(dia => {
+            if (dia.itens) {
+                dia.itens.forEach(tarefa => {
+                    if (tarefa.concluida) {
+                        tarefasConcluidas.push(tarefa);
+                    } else {
+                        tarefasPendentes.push(tarefa);
+                    }
+                });
+            }
+        });
+
+        tela.innerHTML = `
             <div id="dados" style="text-align:center;">
-                <div class="dadosjs">PONTOS: ${dado.pontos}</div><br><br>
-                <div class="dadosjs">SEMANA ${dado.semanas}</div><br><br>
-
-                <button class="btn-tarefa" onclick="location.href='detalhes.html?id=${dado.tarefas[0].id}'">
-                    TAREFAS CONCLUÍDAS: ${dado.tarefas[0].itens.length}
+                <div class="dadosjs">PONTOS: ${usuario.pontuacao || 0}</div><br><br>
+                
+                <button class="btn-tarefa" onclick="location.href='detalhes.html?tipo=concluidas'">
+                    TAREFAS CONCLUÍDAS: ${tarefasConcluidas.length}
                 </button><br><br>
 
-                <button class="btn-tarefa" onclick="location.href='detalhes.html?id=${dado.tarefas[1].id}'">
-                    TAREFAS PENDENTES: ${dado.tarefas[1].itens.length}
+                <button class="btn-tarefa" onclick="location.href='detalhes.html?tipo=pendentes'">
+                    TAREFAS PENDENTES: ${tarefasPendentes.length}
                 </button><br><br>
             </div>
         `;
+
+        const totalTarefas = tarefasConcluidas.length + tarefasPendentes.length;
+        const percentualConcluido = totalTarefas > 0 ? (tarefasConcluidas.length / totalTarefas) * 100 : 0;
+
+        tela.innerHTML += `
+            <p id="p-grafico">Porcentagem: ${percentualConcluido.toFixed(1)}% das tarefas concluídas</p>
+            <div id="grafico" style="max-width: 600px; height: 400px; margin: 40px auto;">
+                <canvas id="myChart"></canvas>
+            </div>
+        `;
+
+        renderizarGrafico(percentualConcluido);
     }
 
-    const ultimo = informacoes[informacoes.length - 1];
-    const total = ultimo.tarefas[0].itens.length + ultimo.tarefas[1].itens.length;
-    const percentual = (ultimo.tarefas[0].itens.length / total) * 100;
+    function renderizarGrafico(percentualAtual) {
+        const ctx = document.getElementById('myChart');
+        if (!ctx) return;
+        
+        const dadosDoGrafico = [12, 18, 35, 25, percentualAtual]; 
 
-    tela.innerHTML += `
-    <p id="p-grafico">Porcentagem: ${percentual.toFixed(2)}% das tarefas concluídas</p>
-    <div id="grafico" style="max-width: 600px; height: 400px; margin: 40px auto;">
-        <canvas id="myChart"></canvas>
-    </div>
-`;
-
-const ctx = document.getElementById('myChart');
-
-
-new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5'],
-    datasets: [{
-      label: 'MENU PRODUTIVIDADE - TAREFAS CONCLUÍDAS',
-      data: [11, 38, percentual, 40, 59],
-      backgroundColor: ['#129745'],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: { color: 'black' }
-      },
-      x: {
-        ticks: { color: 'black' }
-      }
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Sua Semana Atual'],
+                datasets: [{
+                    label: 'Produtividade - % de Tarefas Concluídas por Semana',
+                    data: dadosDoGrafico,
+                    backgroundColor: ['#129745'],
+                    borderColor: ['#0e6f32'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, max: 100, ticks: { color: 'black' } },
+                    x: { ticks: { color: 'black' } }
+                }
+            }
+        });
     }
-  }
+
+    montarPagina();
 });
-};
-
-
-// Interação da página DETALHES.HTML
-const params = new URLSearchParams(location.search);
-const id = params.get('id');
-const exibicao1 = document.getElementById('exibicao');
-
-const tarefas = informacoes[0].tarefas;  // acessa o array tarefas do meu JSON
-
-const exibicao = tarefas.find(t => t.id == id);
-
-if (exibicao && exibicao1) {
-    exibicao1.innerHTML += `<header class="cabecalho"><h1>Tarefas ${exibicao.tipo}</h1></header>`;
-    exibicao.itens.forEach(item => {
-        exibicao1.innerHTML += `<br><br><div id="tarefas-exibidas"><li>${item.tarefa}<br></li></div><br>`;
-    });
-} else if (exibicao1) {
-    exibicao1.innerHTML = "URL inválida. Tente novamente...";
-}
-
-
