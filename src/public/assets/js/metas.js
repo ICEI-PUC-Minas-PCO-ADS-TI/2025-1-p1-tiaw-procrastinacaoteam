@@ -6,8 +6,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.location.href = "/login.html"; // Redireciona para login se não houver sessão
         return;
     }
+    const usuarioLogado = JSON.parse(usuarioLogadoString);
+    const usuarioId = usuarioLogado.id;
 
-    const usuarioId = usuario.id;
     let tarefasSalvas = [];
     let mesAtual = new Date().getMonth(); // Mês atual (0-11)
     let anoAtual = new Date().getFullYear(); // Ano atual
