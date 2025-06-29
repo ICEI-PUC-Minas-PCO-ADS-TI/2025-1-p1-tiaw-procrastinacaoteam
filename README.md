@@ -35,7 +35,7 @@ Senha: teste1234
 
 Este projeto tem como objetivo o desenvolvimento de uma aplicação voltada para auxiliar pessoas no combate à procrastinação. A ferramenta oferece funcionalidades como organização de tarefas, cronômetro Pomodoro, relatórios de produtividade e alertas inteligentes.
 
-O desenvolvimento deste projeto visa aplicar conceitos de desenvolvimento ágil, versionamento de código e documentação, utilizando ferramentas como Git, GitHub e Markdown.
+O desenvolvimento deste projeto visa aplicar conceitos de desenvolvimento ágil, versionamento de código e documentação, utilizando ferramentas como Git, GitHub e Visual Studio Code.
 
 # Documentação
 
