@@ -6,7 +6,7 @@
       "email": "danielzin007@gmail.com",
       "senha": "123456",
       "foto": "img/perfil.png",
-      "pontuacao": 35,
+      "pontuacao": 48,
       "onboarding": {
         "idade": 20,
         "qnttarefas": 3,
@@ -469,6 +469,83 @@
           "concluida": false
         }
       ]
+    },
+    {
+      "id": "12",
+      "login": "Ratão",
+      "email": "ratao@gmail.com",
+      "senha": "ratata",
+      "foto": "/assets/images/usuario.png",
+      "pontuacao": 0,
+      "onboarding": {
+        "idade": "12",
+        "qnttarefas": "2",
+        "perfil": "Procrastinador",
+        "objetivo": "organizar melhor a rotina",
+        "distracao": "Sim"
+      },
+      "tarefas": [
+        {
+          "titulo": "Colocar música ambiente de foco",
+          "concluida": false
+        },
+        {
+          "titulo": "Colocar o celular em modo avião por 1 hora",
+          "concluida": false
+        },
+        {
+          "titulo": "Dividir tarefas grandes em partes pequenas",
+          "concluida": false
+        },
+        {
+          "titulo": "Escrever suas metas do dia em um post-it",
+          "concluida": false
+        },
+        {
+          "titulo": "Fazer check-in diário com um amigo sobre tarefas",
+          "concluida": false
+        },
+        {
+          "titulo": "Evitar redes sociais pela manhã",
+          "concluida": false
+        },
+        {
+          "titulo": "Trabalhar por blocos de 25 minutos",
+          "concluida": false
+        },
+        {
+          "titulo": "Eliminar distrações por 1 hora",
+          "concluida": false
+        },
+        {
+          "titulo": "Recompensar-se ao concluir uma tarefa",
+          "concluida": false
+        },
+        {
+          "titulo": "Organizar o ambiente de trabalho",
+          "concluida": false
+        },
+        {
+          "titulo": "Assistir a um vídeo sobre produtividade",
+          "concluida": false
+        },
+        {
+          "titulo": "Usar técnica Pomodoro por 2 horas",
+          "concluida": false
+        },
+        {
+          "titulo": "Definir um tempo limite para cada tarefa",
+          "concluida": false
+        },
+        {
+          "titulo": "Fazer uma lista de tarefas curtas",
+          "concluida": false
+        },
+        {
+          "titulo": "Começar o dia com a tarefa mais difícil",
+          "concluida": false
+        }
+      ]
     }
   ],
   "tarefas": [
@@ -516,18 +593,6 @@
           "TarefasListada": "trabalho ATP",
           "nivelImportancia": "Alta",
           "concluida": true
-        }
-      ],
-      "usuarioId": 1
-    },
-    {
-      "id": "50ea",
-      "DataListada": "2025-06-27",
-      "itens": [
-        {
-          "TarefasListada": "Reolar pros crias",
-          "nivelImportancia": "Alta",
-          "concluida": false
         }
       ],
       "usuarioId": 1
@@ -587,7 +652,7 @@
         {
           "TarefasListada": "teste",
           "nivelImportancia": "Media",
-          "concluida": false
+          "concluida": true
         }
       ],
       "usuarioId": 1
