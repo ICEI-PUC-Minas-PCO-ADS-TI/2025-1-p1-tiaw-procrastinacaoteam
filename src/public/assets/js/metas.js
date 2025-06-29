@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const usuario = JSON.parse(sessionStorage.getItem("usuario"));
-    if (!usuario || !usuario.id) {
-      alert("Sessão expirada. Faça login novamente.");
-      window.location.href = "/login.html";
+
+    const usuarioLogadoString = sessionStorage.getItem('usuario');
+    if (!usuarioLogadoString) {
+      alert('Sessão não encontrada. Por favor, faça o login.');
+      window.location.href = "/login.html"; 
       return;
     }
+    const usuarioLogado = JSON.parse(usuarioLogadoString);
+    const usuarioId = usuarioLogado.id;
 
-    const usuarioId = usuario.id;
     let tarefasSalvas = [];
     let mesAtual = new Date().getMonth();
     let anoAtual = new Date().getFullYear();
@@ -16,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function buscarTarefas() {
       try {
-        const resposta = await fetch(`http://localhost:3000/tarefas?usuarioId=${usuarioId}`);
+        const resposta = await fetch(`https://procrastinacao.glitch.me/tarefas?usuarioId=${usuarioId}`);
         tarefasSalvas = resposta.ok ? await resposta.json() : [];
       } catch (erro) {
         console.error("Erro ao buscar tarefas:", erro);

@@ -241,7 +241,7 @@
         {
           "TarefasListada": "tarefas de TIAW",
           "nivelImportancia": "Alta",
-          "concluida": true
+          "concluida": false
         }
       ],
       "usuarioId": 5
@@ -314,6 +314,11 @@
         {
           "TarefasListada": "Forças",
           "nivelImportancia": "Media",
+          "concluida": true
+        },
+        {
+          "TarefasListada": "ddddddddd",
+          "nivelImportancia": "Alta",
           "concluida": true
         }
       ]

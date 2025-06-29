@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!usuarioId) return; 
 
         try {
-            const resposta = await fetch(`http://localhost:3000/tarefas?usuarioId=${usuarioId}`);
+            const resposta = await fetch(`https://procrastinacao.glitch.me/tarefas?usuarioId=${usuarioId}`);
             tarefasSalvas = await resposta.json();
         } catch (erro) {
             console.error("Erro ao buscar tarefas do usuário:", erro);
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function atualizarTarefaNoServidor(itemDia) {
         try {
-            await fetch(`http://localhost:3000/tarefas/${itemDia.id}`, {
+            await fetch(`https://procrastinacao.glitch.me/tarefas/${itemDia.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(itemDia),
@@ -217,7 +217,7 @@ async function calcularEMostrarPontos() {
 
     try {
 
-      const resposta = await fetch(`http://localhost:3000/tarefas?usuarioId=${usuarioId}`);
+      const resposta = await fetch(`https://procrastinacao.glitch.me/tarefas?usuarioId=${usuarioId}`);
       const tarefasAtuais = await resposta.json();
       
       tarefasSalvas = tarefasAtuais;
@@ -241,12 +241,12 @@ async function calcularEMostrarPontos() {
 
 async function atualizarPontosDoUsuario(usuarioId, pontuacao) {
     try {
-      const respostaUsuario = await fetch(`http://localhost:3000/usuarios/${usuarioId}`);
+      const respostaUsuario = await fetch(`https://procrastinacao.glitch.me/usuarios/${usuarioId}`);
       if(!respostaUsuario.ok) return;
       const usuario = await respostaUsuario.json();
       
       usuario.pontuacao = pontuacao;
-      await fetch(`http://localhost:3000/usuarios/${usuarioId}`, {
+      await fetch(`https://procrastinacao.glitch.me/usuarios/${usuarioId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(usuario),
