@@ -22,13 +22,12 @@ Com nosso projeto "Action Mode", temos o objetivo de construir um site que auxil
 
 ## Instruções de utilização
 
-Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.
+Primeiramente, acessar nosso site pelo navegador através do link https://www.actionmode.online/.
 
-Não deixe de informar o link onde a aplicação estará disponível para acesso (por exemplo: https://adota-pet.herokuapp.com/src/index.html).
+Para acessar ao site, ir em "Login" e preencher os campos necessários com os dados informados abaixo.
 
-Se houver usuário de teste, o login e a senha também deverão ser informados aqui (por exemplo: usuário - admin / senha - admin).
-
-O link e o usuário/senha descritos acima são apenas exemplos de como tais informações deverão ser apresentadas.
+Usuário: Teste
+Senha: teste1234
 
 # Descrição
 
