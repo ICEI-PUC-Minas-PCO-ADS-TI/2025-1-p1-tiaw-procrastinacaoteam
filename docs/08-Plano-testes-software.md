@@ -32,10 +32,20 @@ Por exemplo:
 
 | **Caso de teste**  | **CT-003 – Assinalar tarefas concluídas **  |
 |:---: |:---: |
-| Requisito associado | RF-00Y - Necessário acesso ao site e inclusão de tarefas pela aba "Calendário"  |
+| Requisito associado | RF-00Z - Necessário acesso ao site e inclusão de tarefas pela aba "Calendário"  |
 | Objetivo do teste | Verificar sistema de pontos e alteração de tarefas pendentes para concluídas |
 | Passos | - Acessar o navegador <br> - Informar o endereço do site https://actionmode.online/index.html <br> - Fazer Login <br> - Acessar a aba "Missões" <br> - Selecionar data informada anteriormente no cadastro de tarefas <br> - Marcar o checkbox da tarefa |
 | Critério de êxito | - Alteração de campo da tarefa de "Pendente" para "Concluída" na aba "Progresso" do site |
+| Responsável pela elaboração do caso de teste | Vinicius Muniz |
+
+<br>
+
+| **Caso de teste**  | **CT-004 – Edição de perfil **  |
+|:---: |:---: |
+| Requisito associado | RF-00A - Login previamente cadastrado no site  |
+| Objetivo do teste | Verificar edição de dados e novo login com o novo acesso informado |
+| Passos | - Acessar o navegador <br> - Informar o endereço do site https://actionmode.online/index.html <br> - Fazer Login <br> - Acessar a aba "Configurações" <br> - Preencher os campos de nome, e-mail e senha com novos dados  <br> - Ir em "Salvar Alterações" |
+| Critério de êxito | - Alerta com mensagem "Perfil atualizado com sucesso!" e login disponível com novas informações inseridas |
 | Responsável pela elaboração do caso de teste | Vinicius Muniz |
 
 
