@@ -7,12 +7,14 @@
 </head>
 <body>
   <header class="topbar">
-    <a href="index.html"><img src="/assets/images/Imagem preguiça 2.png" alt="Logo" class="logo"></a>
+    <a href="/index.html">
+      <img src="/assets/images/Imagem preguiça 2.png" alt="Logo" class="logo">
+    </a>
     <div class="titulo-centro">
       <h1>Edição de Perfil</h1>
     </div>
     <div class="perfil-area">
-      <span class="pontos">🔥 120</span>
+      <span class="pontos" id="pontosUsuario">🔥 0</span>
       <a href="#"><img src="/assets/images/usuario.png" alt="Foto de Perfil" id="fotoPerfilHeader"></a>
     </div>
   </header>
@@ -25,7 +27,7 @@
         <li><a href="/missoes.html"><img src="/assets/images/alvo.png" alt="Tarefas"></a></li>
         <li><a href="/muda_perfil.html"><img src="/assets/images/perfil.png" alt="Configurações"></a></li>
         <li><a href="/sobre.html"><img src="/assets/images/adicionar.png" alt="Sobre"></a></li>
-        <li><a href="#"><img src="/assets/images/sair.png" alt="Sair"></a></li>
+        <li><a href="#" id="btnSair"><img src="/assets/images/sair.png" alt="Sair"></a></li>
       </ul>
     </nav>
   </aside>
@@ -40,11 +42,11 @@
 
     <div class="blockEntrada">
       <form id="formPerfil">
-        <label>Nome:</label>
+        <label for="login">Nome:</label>
         <input type="text" id="login" />
-        <label>Email:</label>
+        <label for="email">Email:</label>
         <input type="email" id="email" />
-        <label>Senha:</label>
+        <label for="senha">Senha:</label>
         <input type="password" id="senha" />
         <button type="button" onclick="salvarPerfil()">Salvar</button>
       </form>
@@ -52,5 +54,12 @@
   </main>
 
   <script src="/assets/js/muda_perfil.js"></script>
+  <script>
+    // Botão de logout
+    document.getElementById("btnSair").addEventListener("click", () => {
+      sessionStorage.clear();
+      window.location.href = "/login.html";
+    });
+  </script>
 </body>
 </html>

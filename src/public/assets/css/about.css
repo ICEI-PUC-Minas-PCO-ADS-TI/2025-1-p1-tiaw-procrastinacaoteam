@@ -190,6 +190,19 @@ p {
   text-decoration: underline;
 }
 
+.Quiz{
+  margin-top: 5%;
+  background-color: #388e3c;
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
 /* Responsivo */
 @media (max-width: 1024px) {
   .conteudo {

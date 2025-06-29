@@ -1,41 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrada de Tarefas</title>
-    <link rel="stylesheet" href="../../assets/css/InsereTarefas.css">
-    <link rel="icon" href="../../assets/images/Imagem preguiça 2.png">
-
+    <link rel="stylesheet" href="/assets/css/InsereTarefas.css">
+    <link rel="icon" href="/assets/images/Imagem preguiça 2.png">
 </head>
 <body>
+    <h1 class="ACTION-MODE">ACTION MODE</h1>
+    <img src="/assets/images/logo preguiça maior(1).png" alt="Logo" class="Preguica">
 
-    <h1 class="ACTION-MODE">ACTION MODE</h1> <button><a href="../login/login.html"></a></button>
-
-    <img src="../../assets/images/logo preguiça maior(1).png" alt="" class="Preguica">
-    
-    
     <div id="Centro">
-
         <div class="topo">
             <button id="btnCancelar">Limpar</button>
         </div>
         <h2 class="Ndp2">Nos diga o que você precisa fazer</h2>
         <div class="topo2">
-            <a id="btnVoltar" href="../../metas.html">Voltar</a>
+            <a id="btnVoltar" href="/metas.html">Voltar</a>
         </div>
 
         <div class="EntradaTudo">
-            <form action="InsereTarefas.html" id="AddTarefas">
-
-                <label for="EntradaInfo" class="InserirParagrafo">Entrada de Tarefa</label>
+            <form id="AddTarefas">
+                <label for="Entrada" class="InserirParagrafo">Entrada de Tarefa</label>
                 <input type="text" id="Entrada" placeholder="Insira sua tarefa">
                 <br>
                 <label for="EntradaData" class="DataParagrafo">Entrada de Data</label>
-                <input type="date" id="EntradaData"/>
+                <input type="date" id="EntradaData" />
                 <br>
                 <div class="inputs-importancia">
-                     <div class="Importancia-Input">
+                    <div class="Importancia-Input">
                         <input type="radio" id="imp-baixa" name="importancia" value="Baixa">
                         <label for="imp-baixa">Baixa Importância</label>
                     </div>
@@ -50,20 +44,18 @@
                 </div>
 
                 <div class="Add">
-                <input type="submit" value="Adicionar" class="Adicionar">
+                    <input type="submit" value="Adicionar" class="Adicionar">
                 </div>
             </form>
         </div>
 
-            <div class="carrossel-wrapper">
-                <button id="anterior">‹</button>
-                <div class="carrossel" id="criaCard"></div>
-                <button id="proximo">›</button>
-            </div>
-          
-
+        <div class="carrossel-wrapper">
+            <button id="anterior">‹</button>
+            <div class="carrossel" id="criaCard"></div>
+            <button id="proximo">›</button>
+        </div>
     </div>
 
-    <script src="../../assets/js/Iseretarefas.js"></script>
+    <script src="/assets/js/IsereTarefas.js"></script>
 </body>
 </html>

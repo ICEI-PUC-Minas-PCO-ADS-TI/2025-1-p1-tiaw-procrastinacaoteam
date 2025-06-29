@@ -1,14 +1,7 @@
 # Arquitetura da solução
 
-<span style="color:red">Pré-requisitos: <a href="05-Projeto-interface.md"> Projeto de interface</a></span>
-
-Definição de como o software é estruturado em termos dos componentes que fazem parte da solução e do ambiente de hospedagem da aplicação.
-
-![Arquitetura da solução](images/exemplo-arquitetura.png)
-
 ## Funcionalidades
 
-Esta seção apresenta as funcionalidades da solução.
 
 ##### Funcionalidade 1 - Cadastro de Tarefas
 
@@ -157,7 +150,7 @@ Esta seção apresenta os módulos e APIs utilizados na solução.
 
 ## Hospedagem
 
-Explique como a hospedagem e o lançamento da plataforma foram realizados.
+Optamos por utilizar os serviços de hospedagem da HostGator, que dispõe de um painel de controle fácil e prático para exibição dos arquivos de nosso projeto, bem como um serviço de domínio que possibilita de nosso site estar disponível para acesso na internet.
 
 > **Links úteis**:
 > - [Website com GitHub Pages](https://pages.github.com/)

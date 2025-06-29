@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
     async function deletarTarefa(tarefaId, index) {
         if (!confirm('Tem certeza que deseja deletar esta tarefa?')) {
             return;

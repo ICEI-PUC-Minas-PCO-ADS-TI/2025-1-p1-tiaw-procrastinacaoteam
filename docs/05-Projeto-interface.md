@@ -16,14 +16,14 @@ Esta é a interface central da plataforma, que permite ao usuário interagir dir
 #### 5. Menu de Navegação e Responsividade
 A navegação foi projetada para ser intuitiva tanto em desktop quanto em dispositivos móveis. O menu lateral ou superior permite acesso rápido e direto a todas as áreas da plataforma.
 
-#### 5. Calendario
-O calendario foi projetado visando uma melhor organização das tarefas pendentes e já realizadas, além de funcionar como um marcador, podendo servir para agendamento ou lembrete de alguma tarefa.
+#### 5. Calendário
+O calendário foi projetado visando uma melhor organização das tarefas pendentes e já realizadas, além de funcionar como um marcador, podendo servir para agendamento ou lembrete de alguma tarefa.
 
-#### 6. Aréa de progresso
-Essa aréa é ultilizada para visualizar a progressão do usuário dentro do site, contendo seu histórico de realização das tarefas propostas com margens gráficas de evolução.
+#### 6. Área de progresso
+Essa área é utilizada para visualizar a progressão do usuário dentro do site, contendo seu histórico de realização das tarefas propostas com margens gráficas de evolução.
 
-#### 7. Página de Saiba Mais
-Uma página contendo informações, Fontes, e curiosidades sobre o site, contendo referências sobre a procastinação.
+#### 7. Página de saiba mais
+Uma página contendo informações, fontes, e curiosidades sobre o site, contendo referências sobre a procastinação.
 
  ## User flow
 
@@ -73,6 +73,10 @@ A seção Editar Perfil é o seu centro de comando pessoal. Aqui, você pode ger
 ![Wireframes](images/editar%20perfi.jpeg)
 
 
+#### Wireframe aba de Progresso
+Aba que consta tanto as tarefas concluídas quanto as tarefas pendentes, além de um gráfico exibindo o aproveitamento (concluídas x pendentes) do usuário em um limite de tempo. 
+
+![Wireframes](https://github.com/user-attachments/assets/7f0f02fb-b5b7-4927-b47e-e89b03427c5c)
 
 
 

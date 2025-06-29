@@ -8,13 +8,21 @@
 
 
 > Matriz CSD e Mapa de Stakeholders
+
 > Etapas em que realizamos a organização de nossas certezas, suposições e dúvidas a respeito do nosso tema, bem como o levantamento do público e das pessoas que possam se interessar, seja de forma positiva ou negativa, sobre nosso projeto.
+> 
 > ![Matriz CSD](https://github.com/user-attachments/assets/cbd7fcc3-d104-46fa-9cbc-a0ee1a3c3afd)
 
 > ![Mapa de Stakeholders](https://github.com/user-attachments/assets/498b6f86-97f2-4a04-9586-685a1fd13d9b)
 
-> Etapa em que realizamos as entrevistas qualitativas, afim de solucionar dúvidas e identificar/reconhecer as opiniões, experiências e ideias de nossos entrevistados. Dessas respostas, extraímos destaques que podem ajudar no desenvolvimento de nosso projeto.
+
+
 > Entrevistas qualitativas e Highlights de pesquisa
+
+> Etapa em que realizamos as entrevistas qualitativas, afim de solucionar dúvidas e identificar/reconhecer as opiniões, experiências e ideias de nossos entrevistados. Dessas respostas, extraímos destaques que podem ajudar no desenvolvimento de nosso projeto.
+ 
+
+ 
 > ![Entrevistas Qualitativas](https://github.com/user-attachments/assets/bd4a9b43-3853-42a6-a920-9df5fd470d79)
 > ![Highlights](https://github.com/user-attachments/assets/cee67b80-73ef-4321-be94-c32387e011f3)
 

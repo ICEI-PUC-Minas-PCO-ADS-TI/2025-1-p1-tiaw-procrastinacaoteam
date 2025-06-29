@@ -6,7 +6,7 @@
 
 `1º semestre/2025`
 
-Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
+Com nosso projeto "Action Mode", temos o objetivo de construir um site que auxilie seus usuários no combate à procrastinação, através de funcionalidades e ferramentas personalizadas, de modo a alavancar a produtivdade e reforçar hábitos rotineiros produtivos para nossos clientes. 
 
 ## Integrantes
 
