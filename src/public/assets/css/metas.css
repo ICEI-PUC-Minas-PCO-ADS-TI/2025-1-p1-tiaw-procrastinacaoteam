@@ -7,8 +7,8 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #f4f7f6;
-  color: #2e7d32;
+  background-color: #f4f7f6; /* Mantido do seu original */
+  color: #2e7d32; /* Mantido do seu original */
   line-height: 1.6;
 }
 
@@ -31,7 +31,7 @@ body {
 }
 
 .logo {
-  height: 80px;
+  height: 80px; /* Mantido do seu original */
 }
 
 .titulo-centro {
@@ -48,32 +48,33 @@ body {
 .perfil-area {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 20px; /* Mantido do seu original */
 }
 
 .pontos {
-  font-size: 1.2em;
+  font-size: 1.2em; /* Mantido do seu original */
 }
 
 .perfil-icon {
-  height: 35px;
+  height: 35px; /* Mantido do seu original */
   border-radius: 50%;
 }
 
-/* Sidebar */
+/* Sidebar (AGORA PADRONIZADA COM AS OUTRAS PÁGINAS) */
 .sidebar {
   position: fixed;
-  top: 80px;
+  top: 80px; /* Alinhado com a altura da topbar */
   left: 0;
-  width: 80px;
+  width: 90px; /* Largura padronizada */
   height: calc(100vh - 80px);
   background-color: #388e3c;
-  padding-top: 25px;
+  padding-top: 30px; /* Padding padronizado */
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1); /* Sombra padronizada */
   z-index: 100;
+  transition: transform 0.3s ease; /* Adicionado para futuras transições (se houver mobile menu) */
 }
 
 .sidebar nav ul {
@@ -82,14 +83,23 @@ body {
 }
 
 .sidebar nav ul li {
-  margin: 20px 0;
+  margin: 25px 0; /* Margem padronizada entre os ícones */
 }
 
 .sidebar nav ul li img {
-  width: 30px;
+  width: 35px; /* Tamanho do ícone padronizado */
+  /* DESCOMENTE A LINHA ABAIXO se os ícones originais forem escuros e você quiser que fiquem brancos */
+  /* filter: invert(100%); */
+  transition: transform 0.3s ease, filter 0.3s ease; /* Transições padronizadas */
 }
 
-/* Conteúdo principal */
+.sidebar nav ul li a img:hover {
+  transform: scale(1.2); /* Efeito de hover padronizado */
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)); /* Brilho branco padronizado no hover */
+  cursor: pointer; /* Adicionado para feedback visual */
+}
+
+/* Conteúdo principal (Mantido do seu original) */
 .conteudo {
   margin-left: 100px;
   margin-top: 90px;
@@ -191,8 +201,62 @@ button:hover {
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/* Responsivo */
+/* Responsivo (Mantido e ajustado para a nova sidebar) */
 @media (max-width: 768px) {
+  .topbar { /* Ajuste da topbar para mobile */
+    height: auto;
+    flex-direction: column;
+    padding: 15px 30px;
+    gap: 10px;
+  }
+  .logo { /* Ajuste do logo para mobile */
+    height: 50px;
+  }
+  .titulo-centro h1 { /* Ajuste do título para mobile */
+    font-size: 1.6rem;
+  }
+  .perfil-area { /* Ajuste da área de perfil para mobile */
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  .perfil-icon { /* Ajuste do ícone de perfil */
+    height: 40px;
+  }
+  .pontos { /* Ajuste dos pontos */
+    font-size: 1em;
+    padding: 5px 10px;
+  }
+
+  /* Sidebar Responsiva PADRONIZADA */
+  .sidebar {
+    width: 100%; /* Largura total em mobile */
+    flex-direction: row; /* Ícones em linha */
+    justify-content: space-around;
+    height: 70px; /* Altura para sidebar inferior */
+    padding: 10px 0;
+    top: auto; /* Remove top fixo */
+    bottom: 0; /* Fixa na parte inferior */
+    left: 0;
+    right: 0;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); /* Sombra para a sidebar inferior */
+  }
+  .sidebar nav ul {
+    display: flex;
+    gap: 20px; /* Espaçamento entre ícones */
+    width: 100%;
+    justify-content: space-around;
+  }
+  .sidebar nav ul li {
+    margin: 0; /* Remove margem vertical */
+  }
+  .sidebar nav ul li img { /* Ajuste de tamanho para ícones menores em mobile */
+    width: 30px;
+  }
+  .sidebar nav ul li a img:hover { /* Hover para ícones mobile */
+    transform: scale(1.1);
+  }
+
   .grid-dias {
     gap: 10px;
   }
@@ -204,14 +268,16 @@ button:hover {
     font-size: 1em;
     padding: 10px 20px;
   }
-  .titulo-centro h1 {
-    font-size: 1.6rem;
-  }
   h2 {
     font-size: 1.8rem;
   }
   .calendario-mes h3 {
     font-size: 2rem;
+  }
+  .conteudo { /* Ajuste de margem para o conteúdo principal em mobile */
+    margin-left: 0;
+    margin-top: calc(80px + 20px); /* Topbar expandida (aprox. 80px) + um respiro */
+    padding-bottom: 80px; /* Espaço para a sidebar inferior */
   }
 }
 
@@ -224,19 +290,38 @@ button:hover {
     font-size: 1em;
   }
   .conteudo {
-    margin-left: 0;
     padding: 15px;
   }
-  .topbar {
+  .topbar { /* Ajuste da topbar para telas muito pequenas */
     height: 60px;
+    padding: 0 15px;
   }
-  .logo {
+  .logo { /* Ajuste do logo para telas muito pequenas */
     height: 40px;
   }
-  .perfil-icon {
+  .perfil-icon { /* Ajuste do ícone de perfil para telas muito pequenas */
     height: 30px;
   }
+  .pontos { /* Ajuste dos pontos para telas muito pequenas */
+    font-size: 0.9em;
+  }
+  /* Sidebar Responsiva para 480px */
+  .sidebar {
+    height: 60px; /* Altura menor para sidebar inferior */
+    padding: 8px 0;
+  }
+  .sidebar nav ul {
+    gap: 15px;
+  }
+  .sidebar nav ul li img {
+    width: 25px; /* Ícones ainda menores */
+  }
+  .conteudo { /* Ajuste final de margem e padding para telas muito pequenas */
+    margin-top: calc(60px + 15px); /* Topbar menor + respiro */
+    padding-bottom: 70px; /* Sidebar menor + respiro */
+  }
 }
+
 #lista-metas {
   background-color: #ffffff;
   border-radius: 20px;

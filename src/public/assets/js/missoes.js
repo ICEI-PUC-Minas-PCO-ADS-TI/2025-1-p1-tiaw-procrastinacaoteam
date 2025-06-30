@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const usuarioLogadoString = sessionStorage.getItem('usuario');
     if (!usuarioLogadoString) {
         alert('Sessão não encontrada. Por favor, faça o login.');
-        window.location.href = "/login.html"; 
+        window.location.href = "/modulos/login/login.html"; 
         return;
     }
     const usuarioLogado = JSON.parse(usuarioLogadoString);
@@ -32,6 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    document.getElementById("btn-sair")?.addEventListener("click", function (event) {
+        event.preventDefault();
+        alert("Você foi desconectado com sucesso!");
+        sessionStorage.clear();
+        window.location.href = '/index.html'; 
+    });
 
 function desenharCalendario(tarefas, dataParaDesenhar) {
     caminhoDasMissoes.innerHTML = '';

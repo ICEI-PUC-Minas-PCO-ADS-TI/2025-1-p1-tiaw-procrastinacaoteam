@@ -122,4 +122,11 @@ botaoEnviar.addEventListener('click', adicionarComentario);
 document.addEventListener("DOMContentLoaded", async () => {
   await atualizarGraficoPizza();
   await exibirComentarios();
+
+  document.getElementById("btn-sair")?.addEventListener("click", function (event) {
+        event.preventDefault();
+        alert("Você foi desconectado com sucesso!");
+        sessionStorage.clear();
+        window.location.href = '/index.html'; 
+    });
 });

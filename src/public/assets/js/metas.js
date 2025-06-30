@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         event.preventDefault();
         alert("Você foi desconectado com sucesso!");
         sessionStorage.clear();
-        window.location.href = '/login.html'; 
+        window.location.href = '/index.html'; 
     });
 
 

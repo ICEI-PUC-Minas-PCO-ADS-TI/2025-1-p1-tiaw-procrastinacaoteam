@@ -1,20 +1,22 @@
+/* Reset e base */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #90EE90;
-    color: #2e7d32;
-    line-height: 1.6;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
- /* --Começo barra lateral e superior-- */  
+body {
+  font-family: 'Segoe UI', Arial, sans-serif; /* Consistente com o padrão anterior */
+  background-color: #f0f4f8; /* Fundo suave e moderno */
+  color: #334e68; /* Cor de texto profissional */
+  line-height: 1.7; /* Melhor legibilidade */
+  scroll-behavior: smooth;
+}
 
-  .topbar {
-  background-color: #388e3c;
+/* --- Topbar e Sidebar (Padrão Unificado) --- */
+
+.topbar {
+  background-color: #2e7d32; /* Verde rico */
   color: white;
   height: 80px;
   display: flex;
@@ -29,274 +31,360 @@
   font-weight: 600;
   letter-spacing: 1px;
   user-select: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); /* Sombra aprimorada */
 }
-  
-  .logo {
-    height: 80px;
-  }
-  
-  .titulo-centro {
-    flex-grow: 1;
-    text-align: center;
-  }
-  
-  .titulo-centro h1 {
-    font-size: 1.8rem;
-    font-weight: 900;
-    letter-spacing: 1.5px;
-  }
-  
-  .perfil-area {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
 
-  .perfil-area img{
-    width: 50px;
-  }
-  
-  .perfil-icon {
-    height: 35px;
-    border-radius: 50%;
-  }
-  
-  .sidebar {
+.topbar .logo {
+  height: 60px; /* Ajuste de tamanho para harmonia */
+  transition: transform 0.3s ease;
+}
+
+.topbar .logo:hover {
+  transform: scale(1.05);
+}
+
+.titulo-centro {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.titulo-centro h1 {
+  font-size: 2rem; /* Título maior e com impacto */
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.perfil-area {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* Espaçamento ajustado */
+}
+
+.perfil-area .pontos {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #c8e6c9; /* Cor clara para os pontos */
+}
+
+.perfil-area img { /* Estilo para a imagem de perfil no header */
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.perfil-area img:hover {
+  transform: scale(1.1);
+}
+
+.sidebar {
   position: fixed;
   top: 80px;
   left: 0;
-  width: 80px;
+  width: 90px; /* Levemente mais larga */
   height: calc(100vh - 80px);
   background-color: #388e3c;
-  padding-top: 25px;
+  padding-top: 30px; /* Mais padding no topo */
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1); /* Sombra mais destacada */
   z-index: 100;
   transition: transform 0.3s ease;
 }
-  
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  margin: 25px 0; /* Mais espaçamento entre os ícones */
+}
+
+.sidebar nav ul li img {
+  width: 35px; /* Ícones maiores */
+  /* filter: invert(100%); Se seus ícones originais forem pretos e você quiser brancos, descomente esta linha */
+  transition: transform 0.3s ease;
+}
+
+.sidebar nav ul li a img:hover {
+  transform: scale(1.2); /* Efeito de hover mais pronunciado */
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)); /* Brilho branco suave no hover */
+}
+
+/* --- Conteúdo Principal (Main da página) --- */
+
+main.conteudo {
+  margin-left: 100px; /* Ajusta para a largura da sidebar */
+  margin-top: 100px; /* Ajusta para a altura da topbar */
+  padding: 40px; /* Mais padding para o conteúdo */
+  display: flex;
+  flex-direction: column; /* Coluna para alinhar imagem e formulário */
+  align-items: center;
+  gap: 40px; /* Espaçamento entre os blocos */
+  max-width: 1000px; /* Limita a largura para melhor leitura */
+  margin-right: auto;
+  margin-left: auto; /* Centraliza o conteúdo */
+}
+
+.imagemMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 15px; /* Espaçamento entre imagem e botão */
+  background-color: white; /* Fundo branco para o bloco da imagem */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Sombra suave */
+  transition: transform 0.3s ease;
+}
+
+.imagemMain:hover {
+  transform: translateY(-5px); /* Efeito de elevação no hover */
+}
+
+.imagemMain img {
+  width: 180px; /* Imagem maior e mais destacada */
+  height: 180px;
+  border-radius: 50%; /* Circular */
+  object-fit: cover;
+  border: 5px solid #388e3c; /* Borda verde mais robusta */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Sombra mais profunda para a imagem */
+}
+
+.imagemMain button {
+  background-color: #388e3c;
+  color: white;
+  border: none;
+  padding: 12px 25px; /* Mais padding */
+  border-radius: 8px; /* Bordas mais suaves */
+  cursor: pointer;
+  font-weight: 600; /* Texto mais forte */
+  font-size: 1.05rem; /* Fonte ligeiramente maior */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para o botão */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.imagemMain button:hover {
+  background-color: #2e7d32;
+  transform: translateY(-2px); /* Efeito de elevação no hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.blockEntrada {
+  background-color: #ffffff;
+  padding: 40px; /* Mais padding interno */
+  border-radius: 12px; /* Bordas mais suaves */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada */
+  width: 100%;
+  max-width: 600px; /* Aumenta a largura máxima do formulário */
+  margin-top: 20px; /* Ajusta o espaçamento */
+  color: #334e68; /* Cor de texto consistente */
+  transition: transform 0.3s ease;
+}
+
+.blockEntrada:hover {
+  transform: translateY(-5px); /* Efeito de elevação no hover */
+}
+
+.blockEntrada h2 { /* Adicionado estilo para um possível h2 dentro do formulário */
+    font-size: 1.8rem;
+    color: #2e7d32;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.blockEntrada form {
+  display: flex;
+  flex-direction: column;
+}
+
+.blockEntrada label {
+  margin-bottom: 8px; /* Mais espaçamento abaixo do label */
+  font-weight: bold;
+  color: #334e68; /* Cor de texto consistente */
+  font-size: 1.05rem; /* Fonte ligeiramente maior */
+}
+
+.blockEntrada input {
+  padding: 12px; /* Mais padding no input */
+  margin-bottom: 25px; /* Mais espaçamento entre inputs */
+  border-radius: 8px; /* Bordas mais suaves */
+  border: 1px solid #a5d6a7; /* Borda verde clara */
+  font-size: 1.05rem; /* Fonte maior */
+  color: #334e68;
+  background-color: #f9fbfd; /* Fundo off-white */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blockEntrada input:focus {
+  outline: none;
+  border-color: #2e7d32; /* Verde escuro no foco */
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.3); /* Brilho verde no foco */
+}
+
+.blockEntrada input::placeholder {
+    color: #99aab5; /* Placeholder suave */
+}
+
+.blockEntrada button {
+  background-color: #2e7d32; /* Verde escuro */
+  color: white;
+  border: none;
+  padding: 15px; /* Mais padding para o botão */
+  border-radius: 8px;
+  font-size: 1.1rem; /* Fonte maior */
+  font-weight: 700; /* Mais forte */
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.blockEntrada button:hover {
+  background-color: #1b5e20; /* Verde ainda mais escuro no hover */
+  transform: translateY(-2px);
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
+}
+
+.blockEntrada button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Responsividade --- */
+
+@media (max-width: 992px) { /* Tablet e Telas Menores */
+  .topbar {
+    flex-direction: column;
+    height: auto;
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .titulo-centro h1 {
+    font-size: 1.6rem;
+  }
+
+  .perfil-area {
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 70px;
+    padding: 10px 0;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  }
+
   .sidebar nav ul {
-    list-style: none;
-    padding: 0;
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: space-around;
   }
-  
+
   .sidebar nav ul li {
-    margin: 20px 0;
+    margin: 0;
   }
-  
-  .sidebar nav ul li a img:hover {
-    transform: scale(1.10);
+
+  main.conteudo {
+    margin-left: 0; /* Remove o margin-left da sidebar fixa */
+    margin-top: calc(80px + 20px); /* Ajusta para a topbar expandida */
+    padding-bottom: 80px; /* Espaço para a sidebar inferior */
+    padding: 20px; /* Reduz padding em telas menores */
   }
-  
+
+  .imagemMain img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .blockEntrada {
+    max-width: 90%; /* Ajusta a largura máxima do formulário */
+    padding: 30px;
+  }
+}
+
+@media (max-width: 600px) { /* Smartphones */
+  .topbar {
+    padding: 10px;
+  }
+
+  .topbar .logo {
+    height: 50px;
+  }
+
+  .titulo-centro h1 {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+  }
+
+  .perfil-area .pontos {
+    font-size: 1rem;
+  }
+
+  .perfil-area img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .sidebar {
+    height: 60px;
+  }
+
+  .sidebar nav ul {
+    gap: 15px;
+  }
+
   .sidebar nav ul li img {
     width: 30px;
   }
-  
-/* --Fim barra lateral e superior-- */
 
-/* --Começo Main da página-- */
-
-  .conteudo {
-    margin-left: 100px;
-    margin-top: 90px;
-    padding: 30px;
-    display: flex;
-    flex-direction: row;
-    gap: 60px;
-    align-items: center;
-  }
-
-  .imagemMain{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .imagemMain img{
-    width: 400px;
-  }
-  
-  .blockEntrada {
-    background-color: #026F35;;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 300px;
-    color: white
-  }
-
-  .formPerfil input{
-    display: block;
-    flex-direction: column;
-  }
-  
-  button {
-    background-color: #66bb6a;
-    border: none;
-    color: white;
-    padding: 12px 25px;
-    border-radius: 10px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-  
-  button:hover {
-    background-color: #4caf50;
-    transform: scale(1.05);
-  }
   main.conteudo {
-      margin-left: 80px;
-      margin-top: 100px;
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .imagemMain img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #388e3c;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      margin-bottom: 10px;
-    }
-
-    .imagemMain button {
-      background-color: #388e3c;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .imagemMain button:hover {
-      background-color: #2e7d32;
-    }
-
-    .blockEntrada {
-      background-color: #ffffff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 500px;
-      margin-top: 30px;
-    }
-
-    .blockEntrada form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .blockEntrada label {
-      margin-bottom: 5px;
-      font-weight: bold;
-      color: #333;
-    }
-
-    .blockEntrada input {
-      padding: 10px;
-      margin-bottom: 20px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-      transition: border-color 0.3s;
-    }
-
-    .blockEntrada input:focus {
-      outline: none;
-      border-color: #388e3c;
-    }
-
-    .blockEntrada button {
-      background-color: #388e3c;
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .blockEntrada button:hover {
-      background-color: #2e7d32;
-    }
-
-    @media (max-width: 600px) {
-      .blockEntrada {
-        padding: 20px;
-      }
-
-      .imagemMain img {
-        width: 120px;
-        height: 120px;
-      }
-    }
- /* --Fim Main da página-- */
-
-  @media (max-width: 768px) {
-    .grid-dias {
-      gap: 10px;
-    }
-  
-    .dia {
-      height: 70px;
-      font-size: 1.1em;
-    }
-  
-    button {
-      font-size: 1em;
-      padding: 10px 20px;
-    }
-  
-    .titulo-centro h1 {
-      font-size: 1.6rem;
-    }
-  
-    h2 {
-      font-size: 1.8rem;
-    }
-  
-    .conteudo div img {
-      font-size: 2rem;
-    }
+    margin-top: calc(70px + 15px); /* Reajusta margin-top */
+    padding-bottom: 70px;
+    padding: 15px;
   }
-  
-  @media (max-width: 480px) {
-  
-    .conteudo div img{
-      height: 60px;
-      font-size: 1em;
-    }
-  
-    .conteudo {
-      margin-left: 0;
-      padding: 15px;
-    }
-  
-    .topbar {
-      height: 60px;
-    }
-  
-    .logo {
-      height: 40px;
-    }
-  
-    .perfil-icon {
-      height: 30px;
-    }
+
+  .imagemMain img {
+    width: 120px;
+    height: 120px;
   }
+
+  .imagemMain button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+
+  .blockEntrada {
+    padding: 25px;
+    max-width: 95%; /* Ocupa quase toda a largura */
+  }
+
+  .blockEntrada label {
+    font-size: 0.95rem;
+  }
+
+  .blockEntrada input {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .blockEntrada button {
+    padding: 12px;
+    font-size: 1rem;
+  }
+}

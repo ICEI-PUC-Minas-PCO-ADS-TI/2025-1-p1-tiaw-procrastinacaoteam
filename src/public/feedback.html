@@ -11,55 +11,59 @@
 
 <body>
     <header class="topbar">
-        <a href="index.html"><img src="assets/images/Imagem preguiça 2.png" alt="Logo" class="logo"></a>
+        <a href="index.html"><img src="assets/images/Imagem preguiça 2.png" alt="Logo do Site" class="logo"></a>
         <div class="titulo-centro">
-            <h1>Edição de Perfil</h1>
-        </div>
+            <h1>Feedback Unificado</h1> </div>
         <div class="perfil-area">
             <span class="pontos">🔥 120</span>
-            <a href="#"><img src="assets/images/usuario.png" alt="Foto de Perfil" id="fotoPerfilHeader" /></a></li>
+            <a href="/muda_perfil.html"><img src="assets/images/usuario.png" alt="Foto de Perfil do Usuário" id="fotoPerfilHeader" /></a>
         </div>
     </header>
 
     <aside class="sidebar">
         <nav>
             <ul>
-                <li><a href="/metas.html"><img src="assets/images/calendar.png" alt="Calendário"></a></li>
-                <li><a href="/retrospecto.html"><img src="assets/images/meta.png" alt="Progresso"></a></li>
-                <li><a href="/missoes.html"><img src="assets/images/alvo.png" alt="Tarefas"></a></li>
-                <li><a href="/muda_perfil.html"><img src="assets/images/perfil.png" alt="Configurações"></a></li>
-                <li><a href="/sobre.html"><img src="assets/images/adicionar.png" alt="Sobre"></a></li>
-                <li><a href="/feedback.html"><img src="assets/images/feedback_icon.png" alt="Feedback"></a></li>
-                <li><a href="#" id="btn-sair"><img src="/assets/images/sair.png" alt="Sair"></a></li>
+                <li><a href="/metas.html" title="Ver Metas"><img src="assets/images/calendar.png" alt="Ícone de Calendário"></a></li>
+                <li><a href="/retrospecto.html" title="Ver Retrospecto"><img src="assets/images/meta.png" alt="Ícone de Meta"></a></li>
+                <li><a href="/missoes.html" title="Ver Missões"><img src="assets/images/alvo.png" alt="Ícone de Alvo"></a></li>
+                <li><a href="/muda_perfil.html" title="Editar Perfil"><img src="assets/images/perfil.png" alt="Ícone de Perfil"></a></li>
+                <li><a href="/sobre.html" title="Sobre o Projeto"><img src="assets/images/adicionar.png" alt="Ícone de Informações"></a></li>
+                <li><a href="/feedback.html" title="Deixar Feedback"><img src="assets/images/feedback_icon.png" alt="Ícone de Feedback"></a></li>
+                <li><a href="#" id="btn-sair" title="Sair da Conta"><img src="/assets/images/sair.png" alt="Ícone de Sair"></a></li>
             </ul>
         </nav>
     </aside>
 
-    <!-- Conteúdo Principal -->
     <main>
         <div class="conteudo-horizontal">
             <div class="grafico">
+                <h2>Média de Avaliações</h2>
                 <canvas id="graficoNotas"></canvas>
-                <h2>Notas do Site</h2>
             </div>
 
             <div class="comentarios">
-                <h2>Comentários</h2>
-                <table id="comentarios-lista"></table>
+                <h2>Últimos Comentários</h2>
+                <table id="comentarios-lista">
+                    <thead>
+                        <tr>
+                            <th>Comentário</th>
+                            <th class="data">Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
             </div>
         </div>
 
-        <!-- Área de Avaliação -->
-        <div class="container">
-            <h1>Deixe seu Feedback</h1>
-            <div class="stars">
-                <span class="star" data-value="1">&#9733;</span>
-                <span class="star" data-value="2">&#9733;</span>
-                <span class="star" data-value="3">&#9733;</span>
-                <span class="star" data-value="4">&#9733;</span>
-                <span class="star" data-value="5">&#9733;</span>
+        <div class="container formulario"> <h1>Compartilhe seu Feedback</h1> <div class="stars">
+                <span class="star" data-value="1" title="Péssimo">&#9733;</span>
+                <span class="star" data-value="2" title="Ruim">&#9733;</span>
+                <span class="star" data-value="3" title="Regular">&#9733;</span>
+                <span class="star" data-value="4" title="Bom">&#9733;</span>
+                <span class="star" data-value="5" title="Excelente">&#9733;</span>
             </div>
-            <textarea id="comentario" placeholder="Deixe seu comentário..."></textarea>
+            <textarea id="comentario" placeholder="Escreva seu comentário aqui..."></textarea>
             <button id="enviar">Enviar Feedback</button>
             <div id="mensagem"></div>
         </div>

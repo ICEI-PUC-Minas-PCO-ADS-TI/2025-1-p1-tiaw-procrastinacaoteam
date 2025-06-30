@@ -7,77 +7,123 @@
 body {
     line-height: 1.6;
     min-height: 100vh;
-    font-family: sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Arial, sans-serif; 
+    background-color: #f0f4f8; 
+    color: #334e68; 
 }
 
-.topbar { 
-  background-color: #388e3c; 
-  color: white; 
-  height: 80px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between; 
-  padding: 0 30px; 
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  z-index: 110; 
+.topbar {
+  background-color: #388e3c;
+  color: white;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 110;
+  font-weight: 600;
+  letter-spacing: 1px;
+  user-select: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); 
 }
 
-.logo { 
-  height: 80px; 
+.logo {
+  height: 60px; 
+  transition: transform 0.3s ease;
 }
 
-.titulo-centro { 
-  flex-grow: 1; 
-  text-align: center; 
-}
-.perfil-area { 
-  display: flex; 
-  align-items: center; 
-  gap: 20px; 
+.logo:hover {
+  transform: scale(1.05);
 }
 
-.pontos { font-size: 1.2em; 
+.titulo-centro {
+  flex-grow: 1;
+  text-align: center;
 }
 
-.perfil-icon { 
-  height: 35px; 
-  border-radius: 50%; 
+.titulo-centro h1 { 
+    font-size: 2rem; 
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
-.sidebar { 
-  position: fixed; 
-  top: 80px; 
-  left: 0; 
-  width: 80px; 
-  height: calc(100vh - 80px); 
-  background-color: #388e3c; 
-  padding-top: 25px; 
-  z-index: 100; 
+.perfil-area {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* Espaçamento ajustado para consistência */
 }
 
-.sidebar nav ul { 
-  list-style: none; 
-  padding: 0; 
-  text-align: center; 
+.pontos {
+    font-size: 1.1rem; /* Tamanho da fonte consistente */
+    font-weight: 600;
+    color: #c8e6c9; /* Cor clara para os pontos, consistente */
 }
 
-.sidebar nav ul li { 
-  margin: 20px 0; 
+.perfil-area img { /* Estilo para a imagem de perfil no header (consistente) */
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
-.sidebar nav ul li img { 
-  width: 30px; 
+.perfil-area img:hover {
+  transform: scale(1.1);
 }
+
+/* --- Sidebar (AGORA PADRONIZADA COM AS OUTRAS PÁGINAS) --- */
+
+.sidebar {
+  position: fixed;
+  top: 80px; /* Alinhado com a altura da topbar */
+  left: 0;
+  width: 90px; /* Largura padronizada */
+  height: calc(100vh - 80px);
+  background-color: #388e3c;
+  padding-top: 30px; /* Padding padronizado */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1); /* Sombra padronizada */
+  z-index: 100;
+  transition: transform 0.3s ease;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.sidebar nav ul li {
+  margin: 25px 0; /* Margem padronizada entre os ícones */
+}
+
+.sidebar nav ul li img {
+  width: 35px; /* Tamanho do ícone padronizado */
+  /* DESCOMENTE A LINHA ABAIXO se os ícones originais forem escuros e você quiser que fiquem brancos */
+  /* filter: invert(100%); */
+  transition: transform 0.3s ease;
+}
+
+.sidebar nav ul li a img:hover {
+  transform: scale(1.2); /* Efeito de hover padronizado */
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)); /* Brilho branco padronizado no hover */
+}
+
+/* --- Conteúdo Principal (Mantido do seu original) --- */
 
 #conteudos {
-    margin-top: 80px;
-    margin-left: 80px;
+    margin-top: 80px; /* Mantido do seu original */
+    margin-left: 80px; /* Mantido do seu original */
     flex-grow: 1;
-    padding: 20px;
+    padding: 20px; /* Mantido do seu original */
     background-image: url("../../assets/images/florest1.jpg"); 
     background-size: cover;
     background-attachment: fixed;
@@ -220,4 +266,107 @@ body {
 
 #lista-tarefas-dia li.imp-baixa {
     border-left: 5px solid #28a745; 
+}
+
+
+
+@media (max-width: 768px) {
+    /* Ajustes específicos para o seu CSS original em 768px */
+    .calendario-header { /* Seu estilo original que precisa de flex-direction column aqui */
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+    .grid-dias { 
+      gap: 10px;
+    }
+    .dia { 
+      height: 70px;
+      font-size: 1.1em;
+    }
+    button {
+      font-size: 1em;
+      padding: 10px 20px;
+    }
+    .titulo-centro h1 {
+      font-size: 1.6rem;
+    }
+  
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        height: 70px; 
+        padding: 10px 0;
+        top: auto; 
+        left: 0;
+        right: 0;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); 
+    }
+    .sidebar nav ul {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+        justify-content: space-around;
+    }
+    .sidebar nav ul li {
+        margin: 0; 
+    }
+    #conteudos {
+        margin-left: 0; 
+        margin-top: 80px; 
+        padding-bottom: 80px; 
+    }
+}
+ 
+@media (max-width: 480px) {
+    
+    .conteudo div img { 
+      height: 60px;
+      font-size: 1em; 
+    }
+    .conteudo { 
+      margin-left: 0;
+      padding: 15px;
+    }
+    .topbar {
+      height: 60px;
+      padding: 10px 15px; 
+      flex-direction: column; 
+      gap: 5px;
+      justify-content: center;
+    }
+    .logo {
+      height: 40px;
+    }
+    .perfil-icon { 
+      height: 30px;
+    }
+    .perfil-area img { 
+        width: 35px;
+        height: 35px;
+    }
+    .titulo-centro h1 { 
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+    .pontos { 
+        font-size: 0.9em;
+    }
+  
+    .sidebar {
+        height: 60px; 
+        padding: 8px 0;
+    }
+    .sidebar nav ul {
+        gap: 15px;
+    }
+    .sidebar nav ul li img {
+        width: 25px; 
+    }
+    #conteudos {
+        margin-top: 60px; 
+        padding-bottom: 60px; 
+        padding: 10px; 
+    }
 }

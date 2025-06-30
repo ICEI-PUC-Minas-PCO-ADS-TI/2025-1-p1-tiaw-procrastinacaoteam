@@ -159,6 +159,83 @@
         "objetivo": "organizar melhor a rotina",
         "distracao": "Nao"
       }
+    },
+    {
+      "id": "12",
+      "login": "Macale",
+      "email": "macale@gmail.com",
+      "senha": "Macale",
+      "foto": "/assets/images/usuario.png",
+      "pontuacao": 0,
+      "onboarding": {
+        "idade": "34",
+        "qnttarefas": "12",
+        "perfil": "Procrastinador",
+        "objetivo": "Vencer a procrastinacao",
+        "distracao": "Nao"
+      },
+      "tarefas": [
+        {
+          "titulo": "Assistir a um vídeo sobre produtividade",
+          "concluida": false
+        },
+        {
+          "titulo": "Trabalhar por blocos de 25 minutos",
+          "concluida": false
+        },
+        {
+          "titulo": "Fazer uma lista de tarefas curtas",
+          "concluida": false
+        },
+        {
+          "titulo": "Dividir tarefas grandes em partes pequenas",
+          "concluida": false
+        },
+        {
+          "titulo": "Eliminar distrações por 1 hora",
+          "concluida": false
+        },
+        {
+          "titulo": "Fazer check-in diário com um amigo sobre tarefas",
+          "concluida": false
+        },
+        {
+          "titulo": "Usar técnica Pomodoro por 2 horas",
+          "concluida": false
+        },
+        {
+          "titulo": "Escrever suas metas do dia em um post-it",
+          "concluida": false
+        },
+        {
+          "titulo": "Recompensar-se ao concluir uma tarefa",
+          "concluida": false
+        },
+        {
+          "titulo": "Evitar redes sociais pela manhã",
+          "concluida": false
+        },
+        {
+          "titulo": "Colocar música ambiente de foco",
+          "concluida": false
+        },
+        {
+          "titulo": "Colocar o celular em modo avião por 1 hora",
+          "concluida": false
+        },
+        {
+          "titulo": "Organizar o ambiente de trabalho",
+          "concluida": false
+        },
+        {
+          "titulo": "Definir um tempo limite para cada tarefa",
+          "concluida": false
+        },
+        {
+          "titulo": "Começar o dia com a tarefa mais difícil",
+          "concluida": false
+        }
+      ]
     }
   ],
   "tarefas": [
@@ -408,6 +485,12 @@
       "nota": 5,
       "comentario": "Perfeito",
       "data": "2025-01-16"
+    },
+    {
+      "nota": 5,
+      "comentario": "Muito bom, gostei muito",
+      "data": "29/06/2025",
+      "id": "coCjnA3"
     }
   ]
 }
