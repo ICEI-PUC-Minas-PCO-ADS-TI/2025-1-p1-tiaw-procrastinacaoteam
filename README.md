@@ -10,9 +10,9 @@ Com nosso projeto "Action Mode", temos o objetivo de construir um site que auxil
 
 ## Integrantes
 
-* Lara Rossini Rhis
 * Daniel Rodrigues Bleme
 * João Vitor Matias Gonçalves
+* Lara Rossini Rhis
 * Marcus Vinicius Lima Pereira
 * Vinicius Muniz Costa
 
@@ -27,13 +27,14 @@ Primeiramente, acessar nosso site pelo navegador através do link https://www.ac
 Para acessar ao site, ir em "Login" e preencher os campos necessários com os dados informados abaixo.
 
 Usuário: Teste
+
 <br>
-<br>
+
 Senha: teste1234
 
 # Descrição
 
-Este projeto tem como objetivo o desenvolvimento de uma aplicação voltada para auxiliar pessoas no combate à procrastinação. A ferramenta oferece funcionalidades como organização de tarefas, cronômetro Pomodoro, relatórios de produtividade e alertas inteligentes.
+Este projeto tem como objetivo o desenvolvimento de uma aplicação voltada para auxiliar pessoas no combate à procrastinação. A ferramenta oferece funcionalidades como organização de tarefas, relatórios de produtividade e alertas inteligentes.
 
 O desenvolvimento deste projeto visa aplicar conceitos de desenvolvimento ágil, versionamento de código e documentação, utilizando ferramentas como Git, GitHub e Visual Studio Code.
 
