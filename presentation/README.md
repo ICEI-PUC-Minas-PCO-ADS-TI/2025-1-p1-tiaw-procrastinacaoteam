@@ -1,14 +1,18 @@
 Apresentação do projeto
+
 Pré-requisitos: Todos os demais artefatos
 
 Slides
+
 Coloque aqui o conjunto de slides.
+
 
 O arquivo deve estar no formato PDF e conter a apresentação completa do projeto, abordando todos os itens trabalhados nos demais artefatos.
 
 
 
 Vídeo
+
 O grupo também deverá gravar um vídeo de até cinco minutos apresentando a solução. O vídeo deve incluir uma demonstração da aplicação hospedada, mostrando seu funcionamento.
 
 Podem utilizar quaisquer recursos na produção do vídeo, mas certifiquem-se de destacar as funcionalidades da aplicação.
