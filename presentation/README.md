@@ -26,4 +26,5 @@ taxa de FPS limitada a 30 quadros por segundo
 resolução HD (720p) ou Full HD (1080p)
 formato mp4.
 
+Link do Vídeo Pitch: https://drive.google.com/file/d/1fWRb5T1Mj4vR6Tt-86OGz71ddeYHtGYV/view?usp=drive_link
 
